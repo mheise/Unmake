@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8F855E02-954C-4E7C-8467-DC032DD03077}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProjectGenerator</RootNamespace>
     <AssemblyName>ProjectGenerator</AssemblyName>
@@ -52,6 +52,7 @@
     <StartupObject>ProjectGenerator.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="XmlReader.cs" />
     <Compile Include="TextReader.cs" />
     <Compile Include="IXMLFile.cs" />
     <Compile Include="VSSolution.cs" />
@@ -123,6 +124,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

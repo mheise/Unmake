@@ -1,29 +1,14 @@
 <cbf>
   <buildsystem category="Scopes">
-	<graph1>
+	<graph>
 		<node name="helloworld.exe"/> 
-		<node name="a.obj"/>  
-		<node name="b.obj"/> 
-		<node name="c.lib"/> 		
+		<node name="a.obj"/>  	
 		<node name="a.cpp"/>  
-		<node name="b.cpp"/> 
-		<node name="c.cpp"/> 
-		<edge source="helloworld.exe" target="a.obj"/>
-		<edge source="helloworld.exe" target="b.obj"/>
-		<edge source="a.obj" target="a.cpp"/>
-		<edge source="b.obj" target="b.cpp"/>
-		<variable CFLAGS="/w"/>
-	</graph1>
-	<graph2>
-		<node name="c.lib"/> 
-		<node name="d.obj"/>  
-		<node name="e.obj"/> 		
-		<edge source="d.obj" target="d.cpp"/>
-		<variable CFLAGS="/WALL"/>
-	</graph2>
+		<edge source="helloworld.exe" target="a.obj" instruction="link a.obj /out helloworld" />
+		<edge source="a.obj" target="a.cpp" instruction="cl /EHsc a.cpp"/>
+	</graph>
   </buildsystem>
-  <buildsystem category="Instructions">
-  </buildsystem>
+  
   <buildsystem category="GlobalRules">
   </buildsystem>
 

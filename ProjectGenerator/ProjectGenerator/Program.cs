@@ -11,11 +11,15 @@ namespace ProjectGenerator
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            XmlReader reader = new XmlReader();
+            reader.read("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\ProjectGenerator\\Sample_Build_System\\cbf.xml");
+            /*
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+             * */
         }
     }
 }
