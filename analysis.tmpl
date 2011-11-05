@@ -3,12 +3,14 @@
         <title>Build System Analysis</title>
     </head>
     <body>
-        Build system total depth is <TMPL_VAR NAME=DEPTH>
-        File most depended on was <TMPL_VAR NAME=ACHILLES>
-        Build system red flags: <TMPL_VAR NAME=BAD>
-        Build system broken-ness: <TMPL_VAR NAME=BROKEN>
+        <p>
+        Build system total depth is <TMPL_VAR NAME=DEPTH><br>
+        File most depended on was <TMPL_VAR NAME=ACHILLES><br>
+        Build system red flags: <TMPL_VAR NAME=BAD><br>
+        Build system broken-ness: <TMPL_VAR NAME=BROKEN><br>
+        Build system looks like:<br>
 
-        Build system looks like:
             <img src="<TMPL_VAR NAME=IMAGE>">
+        </p>
     </body>
 </html>
