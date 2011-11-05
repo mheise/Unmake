@@ -149,8 +149,6 @@ testpad: testpad.o
 TAGS:   $(SRCS)
 	etags $(SRCS)
 
-.PHONY: clean distclean realclean
-
 clean:
 	rm -f *.o tar rmt testpad testpad.h core
 
@@ -189,3 +187,18 @@ tar.zoo: $(SRCS) $(AUX)
 		> tmp.dir/$$X ; done
 	cd tmp.dir ; zoo aM ../tar.zoo *
 	-rm -rf tmp.dir
+
+regex.h:
+
+tar.h:
+
+port.h:
+
+testpad.o: testpad.c
+	echo testpad.c
+
+testpad.c:
+
+
+
+.PHONY: clean distclean realclean
