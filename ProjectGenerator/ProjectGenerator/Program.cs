@@ -13,8 +13,12 @@ namespace ProjectGenerator
         [STAThread]
         static void Main(string[] args)
         {
+            VSGen vcprojgen = new VSGen();
             XmlReader reader = new XmlReader();
             reader.readbuildfile("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\ProjectGenerator\\Sample_Build_System\\cbf.xml");
+            vcprojgen.CreateTestSolution(@"C:\temp\FooBar", "Foo");
+            //vcprojgen.CreateTestProject(@"C:\temp\FooBar\Foo.csproj", "myproj", VSGen.TestProjectType.Acceptance);
+           
             /*
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
