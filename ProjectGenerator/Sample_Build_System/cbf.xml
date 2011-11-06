@@ -1,15 +1,16 @@
 <cbf>
   <buildsystem category="Scopes">
 	<graph>
-		<node name="helloworld.exe"/> 
-		<node name="a.obj"/>  	
-		<node name="a.cpp"/>  
-		<edge source="a.obj" target="helloworld.exe" >
-			<data>link a.obj /out helloworld</data>
-		</edge>
-		<edge source="a.cpp" target="a.obj"> 
-			<data>cl /EHsc a.cpp</data>
-		</edge>
+		<node name="helloworld.exe">
+		<data>link a.obj /out helloworld</data>
+		</node>
+		<edge source="helloworld.exe" target="a.obj"/>
+		<node name="a.obj">
+		<data>cl /EHsc a.cpp</data>	
+		</node>
+		<edge source="a.obj" target="helloworld.exe" />
+		<node name="a.cpp"/> 	
+		<edge source="a.cpp" target="a.obj"/>
 	</graph>
   </buildsystem>
   

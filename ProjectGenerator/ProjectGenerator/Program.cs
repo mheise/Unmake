@@ -14,7 +14,7 @@ namespace ProjectGenerator
         static void Main(string[] args)
         {
             XmlReader reader = new XmlReader();
-            reader.read("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\ProjectGenerator\\Sample_Build_System\\cbf.xml");
+            reader.readbuildfile("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\ProjectGenerator\\Sample_Build_System\\cbf.xml");
             /*
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
