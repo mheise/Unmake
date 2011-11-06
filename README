@@ -1,0 +1,3 @@
+Unmake aims to allow users to effortlessly transition from the legacy build
+system make to more modern and palatable systems, with an emphasis on Visual
+Studio and cmake.
