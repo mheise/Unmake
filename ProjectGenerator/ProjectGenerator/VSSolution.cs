@@ -10,8 +10,8 @@ namespace ProjectGenerator
     class VSSolution
     {
         private Solution2 vcsol;
-        private String absfilepath;
-        private String relfilepath;
+        private String absfilepath = "";
+        private String relfilepath = "";
         const String absdevenvpath = "devenv.exe";
 
         public VSSolution(Solution2 solution, String afilepath, String rfilepath)

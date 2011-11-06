@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.VCProjectEngine;
-using EnvDTE80;
+using EnvDTE100;
 
 namespace ProjectGenerator
 {
@@ -58,9 +58,11 @@ namespace ProjectGenerator
 
             System.Type vsType = System.Type.GetTypeFromProgID("VisualStudio.DTE.10.0");
             Object vs = System.Activator.CreateInstance(vsType, true);
+      
             EnvDTE80.DTE2 dte8Obj = (EnvDTE80.DTE2)vs;
 
-            Solution2 vhaSolution = (Solution2)dte8Obj.Solution;
+            EnvDTE80.Solution2 vhaSolution = (EnvDTE80.Solution2)dte8Obj.Solution;
+            //EnvDTE100.Solution4 vhaSolution = (EnvDTE100.Solution4)dte8Obj.Solution
             vhaSolution.Open(fullyQualifiedSolutionFileName);
 
             //TODO: Externalize company name
@@ -78,10 +80,12 @@ namespace ProjectGenerator
                 System.IO.Directory.CreateDirectory(testDirName);
             }
 
-
-            EnvDTE.Project vhaTestProj = vhaSolution.AddFromTemplate(testTemplateLocation, testDirName, testProjectName + ".proj", false);
-            vhaTestProj.Save(String.Format("{0}\\{1}.proj", testDirName, testProjectName));
-
+            string csTemplatePath = vhaSolution.GetProjectTemplate("ConsoleApplication.zip", "CSharp");
+            EnvDTE.Project vhaTestProj = vhaSolution.AddFromTemplate(csTemplatePath, testDirName, testProjectName+".proj", false);
+       
+            //EnvDTE.Project vhaTestProj = vhaSolution.AddFromTemplate(testTemplateLocation, testDirName, testProjectName + ".proj", false);
+            //vhaTestProj.Save(String.Format("{0}\\{1}.proj", testDirName, testProjectName));
+            vhaSolution.SaveAs(fullyQualifiedSolutionFileName);
         }
     }
 }
