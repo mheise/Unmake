@@ -16,6 +16,23 @@ namespace ProjectGenerator
             this.extension = vext;
             this.instruction = vinstr;
         }
+        public override bool Equals(System.Object obj)
+        {
+            // If parameter is null return false.
+            if (obj == null)
+            {
+                return false;
+            }
+
+            // If parameter cannot be cast to Point return false.
+            BuildElement p = obj as BuildElement;
+            if ((System.Object)p == null)
+            {
+                return false;
+            }
+
+            return name == p.name;
+        }
         //Filename
         //Extension
         //Type

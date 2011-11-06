@@ -144,6 +144,11 @@ namespace ProjectGenerator
             return nodeSet.FindByValue(value) != null;
         }
 
+        public Node<T> GetNode(T value)
+        {
+            return nodeSet.FindByValue(value);
+        }
+
         public bool Remove(T value)
         {
             // first remove the node from the nodeset

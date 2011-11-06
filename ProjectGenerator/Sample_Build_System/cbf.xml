@@ -4,12 +4,13 @@
 		<node name="helloworld.exe">
 		<data>link a.obj /out helloworld</data>
 		</node>
-		<edge source="helloworld.exe" target="a.obj"/>
 		<node name="a.obj">
 		<data>cl /EHsc a.cpp</data>	
 		</node>
+		<node name="a.cpp"> 	
+		</node>
 		<edge source="a.obj" target="helloworld.exe" />
-		<node name="a.cpp"/> 	
+		<edge source="helloworld.exe" target="a.obj"/>
 		<edge source="a.cpp" target="a.obj"/>
 	</graph>
   </buildsystem>
