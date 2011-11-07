@@ -51,8 +51,7 @@ namespace ProjectGenerator
             string instruction = "";
             string source = "";
             string target = "";
-            BuildElement sourcenode;
-            BuildElement targetnode;
+
             try
             {
                 while (reader.Read())

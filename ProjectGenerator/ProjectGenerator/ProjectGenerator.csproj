@@ -53,6 +53,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BuildElement.cs" />
+    <Compile Include="InstructionParser.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="UserControl1.cs">

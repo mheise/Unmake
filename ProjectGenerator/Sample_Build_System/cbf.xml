@@ -1,17 +1,18 @@
 <cbf>
   <buildsystem category="Scopes">
 	<graph>
-		<node name="helloworld.exe">
-		<data>link a.obj /out helloworld</data>
+		<node name="hellomake.exe">
+		<data>gcc -o hellomake hellomake.c hellofunc.c -I.</data>
 		</node>
-		<node name="a.obj">
-		<data>cl /EHsc a.cpp</data>	
+		<node name="hellomake.c">	
 		</node>
-		<node name="a.cpp"> 	
+		<node name="hellofunc.c"> 	
 		</node>
-		<edge source="a.obj" target="helloworld.exe" />
-		<edge source="helloworld.exe" target="a.obj"/>
-		<edge source="a.cpp" target="a.obj"/>
+		<node name="hellomake.h"> 	
+		</node>
+		<edge source="hellomake.exe" target="hellomake.c" />
+		<edge source="hellomake.exe" target="hellofunc.c"/>
+		<edge source="hellomake.c" target="hellomake.h"/>
 	</graph>
   </buildsystem>
   
