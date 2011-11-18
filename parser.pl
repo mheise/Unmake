@@ -6,6 +6,7 @@ use 5.010;
 use Makefile::Parser::GmakeDB;
 use GraphViz;                           # dirty! DIRTY!
 use HTML::Template;                     # ditto :(
+use XML::TreePP;
 
 # parse
 my $db_listing = `make --print-data-base -pqRrs -f Makefile`;
@@ -17,7 +18,12 @@ our $g = GraphViz->new; # blarg
 our %deps;
 our %edges;
 
-$depth = traverse($ast, 'all', 0);
+my $tree = {};
+$depth = traverse($ast, $tree, 'all', 0);
+my $tpp = XML::TreePP->new;
+my $xml = $tpp->write($tree);
+print $xml;
+
 my @ordered_deps = sort {$deps{$b} <=> $deps{$a}} keys %deps;
 make_template(  depth => $depth,
                 achilles => $ordered_deps[0],
@@ -33,18 +39,20 @@ print $imgfh $g->as_png;
 # ============================================================================
 
 sub traverse {
-    my ($ast, $nodename, $depth) = @_;
+    my ($ast, $tree, $nodename, $depth) = @_;
     my ($node) = grep {$_->target eq $nodename} @{$ast->explicit_rules};
     my $greatest = $depth;
 
     if (defined $node) {
         my $parent = $node->target;
         $g->add_node($parent);
+        $tree->{$parent} = {dep => []};
         for my $child (@{$node->{normal_prereqs}}, @{$node->{ordered_prereqs}}) {
             if (! $edges{$parent}{$child}) {
                 $edges{$parent}{$child} = 1;
                 $g->add_edge($parent, $child);
-                my $cur = traverse($ast, $child, $depth + 1);
+                push @{$tree->{$parent}->{dep}}, $child;
+                my $cur = traverse($ast, $tree, $child, $depth + 1);
                 $greatest = ($cur > $greatest ? $cur : $greatest);
             }
             $deps{$child} = (defined $deps{$child} ? $deps{$child}+1 : 1);
