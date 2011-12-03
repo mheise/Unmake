@@ -136,12 +136,11 @@ install: all
 	-test ! -f rmt || $(INSTALL) rmt /etc/rmt
 	$(INSTALLDATA) $(srcdir)/tar.info* $(infodir)
 
-$(OBJS): tar.h port.h testpad.h
+$(OBJS): %.o: %.c 
+
+
 regex.o buffer.o tar.o: regex.h
 	# getdate.y has 8 shift/reduce conflicts.
-
-testpad.h: testpad
-	./testpad
 
 testpad: testpad.o
 	$(CC) -o $@ testpad.o
@@ -188,17 +187,10 @@ tar.zoo: $(SRCS) $(AUX)
 	cd tmp.dir ; zoo aM ../tar.zoo *
 	-rm -rf tmp.dir
 
+.PHONY: clean distclean realclean
+
+$(SRCS):
+
 regex.h:
 
-tar.h:
 
-port.h:
-
-testpad.o: testpad.c
-	echo testpad.c
-
-testpad.c:
-
-
-
-.PHONY: clean distclean realclean
