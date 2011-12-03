@@ -26,8 +26,8 @@ print $xml;
 
 my @ordered_deps = sort {$deps{$b} <=> $deps{$a}} keys %deps;
 make_template(  depth => $depth,
-                achilles => $ordered_deps[0],
-                broken => $broken,
+                achilles => $ordered_deps[0] // undef,
+                broken => (defined $ordered_deps[0] ? undef : "make couldn't read makefile sensibly"),
                 bad => ($deps{$ordered_deps[0]} > 5 ? 'chokepoints exist' : 0),
                 image => $image,
 );
