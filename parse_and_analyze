@@ -21,6 +21,7 @@ our %edges;
 my $tree = {};
 $depth = traverse($ast, $tree, 'all', 0);
 my $tpp = XML::TreePP->new;
+$tpp->set(indent => 4, output_encoding => 'UTF-8');
 my $xml = $tpp->write($tree);
 print $xml;
 
@@ -42,16 +43,20 @@ sub traverse {
     my ($ast, $tree, $nodename, $depth) = @_;
     my ($node) = grep {$_->target eq $nodename} @{$ast->explicit_rules};
     my $greatest = $depth;
+    $tree->{rule} = [] unless exists $tree->{rule};
 
     if (defined $node) {
         my $parent = $node->target;
         $g->add_node($parent);
-        $tree->{$parent} = {dep => []};
+        push @{$tree->{rule}}, {"-name" => $parent, dep => []};
+        #consider keeping track of this ref instead of grepping for it later
         for my $child (@{$node->{normal_prereqs}}, @{$node->{ordered_prereqs}}) {
             if (! $edges{$parent}{$child}) {
                 $edges{$parent}{$child} = 1;
                 $g->add_edge($parent, $child);
-                push @{$tree->{$parent}->{dep}}, $child;
+                my $elem = (grep {$_->{"-name"} eq $parent}
+                    @{$tree->{rule}})[0];
+                push @{$elem->{dep}}, $child;
                 my $cur = traverse($ast, $tree, $child, $depth + 1);
                 $greatest = ($cur > $greatest ? $cur : $greatest);
             }
