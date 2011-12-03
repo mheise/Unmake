@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+|| NAME:	VSSolution.cs
+||
+||
+||
+|| AUTHORS:	Frank Kotarski
+||
+|| SYNOPSIS:    Wrap around a COM visual studio Solution. Launch devenv to create an actual solutions.
+||
+|| MODULE:	Project generator
+||
+|| MODULE DATA: 
+||		
+|| NOTES:       
+||
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

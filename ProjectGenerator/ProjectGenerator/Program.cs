@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+|| NAME:	Program.cs
+||
+||
+||
+|| AUTHORS:	Frank Kotarski
+||
+|| SYNOPSIS:  Main entry point
+||
+|| MODULE:	Project generator
+||
+|| MODULE DATA: None
+||		
+|| NOTES:       
+||
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,6 +30,7 @@ namespace ProjectGenerator
         [STAThread]
         static void Main(string[] args)
         {
+            //Initialize singleton generator
             VSGen vcprojgen = new VSGen();
             XmlReader reader = new XmlReader();
             reader.readbuildfile("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\ProjectGenerator\\Sample_Build_System\\cbf.xml");
