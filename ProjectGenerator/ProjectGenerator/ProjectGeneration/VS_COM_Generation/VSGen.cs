@@ -1,4 +1,22 @@
-﻿using System;
+﻿/*
+|| NAME:	VSGen.cs
+||
+||
+||
+|| AUTHORS:	Frank Kotarski
+||
+|| SYNOPSIS:    Using EnvDTE and COM wrappers, launch devenv to create a solution. Add projects to solution too.
+||
+|| MODULE:	Project generator
+||
+|| MODULE DATA: 
+||		
+|| NOTES:       
+||
+*/
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+|| NAME:	Form1.cs
+||
+||
+||
+|| AUTHORS:	Frank Kotarski
+||
+|| SYNOPSIS:   Windows form gui
+||
+|| MODULE:	Project generator
+||
+|| MODULE DATA: 
+||		
+|| NOTES:       In Progress. Redesigned from previous revision
+||
+*/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

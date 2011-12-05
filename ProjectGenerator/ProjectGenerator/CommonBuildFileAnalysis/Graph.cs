@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+|| NAME:	Graph.cs
+||
+||
+||
+|| AUTHORS:	Frank Kotarski
+||
+|| SYNOPSIS:    Implementation of 'graph' data structure - composed of directed edges and vertices
+||
+|| MODULE:	Project generator
+||
+|| MODULE DATA: 
+||		
+|| NOTES:  Based off of MSDN example
+||
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
