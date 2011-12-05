@@ -1,4 +1,22 @@
-﻿using System;
+﻿/*
+|| NAME:	XmlReader.cs
+||
+||
+||
+|| AUTHORS:	Frank Kotarski
+||
+|| SYNOPSIS:  Read XML file and place information into Graph
+||
+|| MODULE:	Project generator
+||
+|| MODULE DATA: XML files
+||		
+|| NOTES:       
+||
+*/
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

@@ -1,4 +1,22 @@
-﻿using System;
+﻿/*
+|| NAME:	TextWriter.cs
+||
+||
+||
+|| AUTHORS:	Frank Kotarski
+||
+|| SYNOPSIS:    Write text to a file
+||
+|| MODULE:	Project generator
+||
+|| MODULE DATA: Text files
+||		
+|| NOTES:       
+||
+*/
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

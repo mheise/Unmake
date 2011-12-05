@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+|| NAME:	BuildElement.cs
+||
+||
+||
+|| AUTHORS:	Frank Kotarski
+||
+|| SYNOPSIS:    Encapsulates the information found in a common build file. A "build element" may be a source file, an exe, etc.
+||
+|| MODULE:	Project generator
+||
+|| MODULE DATA: 
+||		
+|| NOTES:       
+||
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

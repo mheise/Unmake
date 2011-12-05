@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+|| NAME:	TextReader.cs
+||
+||
+||
+|| AUTHORS:	Frank Kotarski
+||
+|| SYNOPSIS:   Reads a text file
+||
+|| MODULE:	Project generator
+||
+|| MODULE DATA: Text file
+||		
+|| NOTES:       
+||
+*/
+
+using System;
 using System.IO;
 
 namespace ProjectGenerator
