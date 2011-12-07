@@ -1,7 +1,10 @@
 #!/usr/bin/env perl
+
 use XML::TreePP;
+
 my $tpp = XML::TreePP->new;
 $tpp->set(indent => 4);
+
 my $tree = {
     'rule' => [
     { 
