@@ -1,6 +1,0 @@
-(defvar *nodes* '((main.cpp (include.h foo.cpp bar.cpp))
-                  (foo.cpp  (include.h baz.cpp fred.cpp))
-                  (bar.cpp  (include.h quux.cpp))
-                  (baz.cpp (include.h))
-                  (fred.cpp (include.h quux.cpp))
-                  (quux.cpp ())))

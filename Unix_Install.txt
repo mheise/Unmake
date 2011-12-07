@@ -1,0 +1,5 @@
+To install the parser and analyzer components on a Unix-like system, simply
+copy the files 'parse_and_analyze' and 'analysis.tmpl' to the build directory of
+the project you want to analyze and run 'parse_and_analyze'.
+
+To install 
