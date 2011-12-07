@@ -20,7 +20,8 @@ were:
             tests and print a report of the results.
 
     #8 - Mock Objects
-            TODO
+            We used the CPAN module Test::MockObject to facilitate object
+            mocking for unit testing purposes.
 
     #11- Third-Party Component
             We used many third-party components.  The largest was the CPAN
