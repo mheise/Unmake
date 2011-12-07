@@ -5,7 +5,7 @@ For ASP, we have adopted MSDN's VBScript coding conventions.
 
 For Perl, we have adopted the language's conventional coding standard as
 documented in `perldoc perlstyle`, with the addendum that Moose's coding
-standards apply to all object-oriented code.
+conventions apply to all object-oriented code.
 
 
 
