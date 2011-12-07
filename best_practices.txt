@@ -9,7 +9,8 @@ were:
 
             We used a Makefile for the parser/analyzer (if you think about it,
             this is pretty meta; thankfully, we have little to build for this
-            component and the file itself is nearly trivial, doing only cleanup). 
+            component and the file itself is nearly trivial, doing only cleanup
+            of transient files that exist during testing). 
 
     #7 - Unit tests
             We used the Test Anything Protocol (TAP) standard for unit tests,
@@ -23,4 +24,7 @@ were:
 
     #11- Third-Party Component
             We used many third-party components.  The largest was the CPAN
-            module Makefile::Parser::GMakeDB . 
+            module Makefile::Parser::GMakeDB .  We also used the open-source
+            graph visualization tool GraphViz (and its accompanying CPAN
+            module), XML::TreePP, and HTML::Template.  These open-source
+            libraries can all be browsed via http://search.cpan.org . 
