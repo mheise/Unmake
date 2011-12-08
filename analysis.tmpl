@@ -1,16 +1,120 @@
-<html>
-    <head>
-        <title>Build System Analysis</title>
-    </head>
-    <body>
-        <p>
-        Build system total depth is <TMPL_VAR NAME=DEPTH><br>
-        File most depended on was <TMPL_VAR NAME=ACHILLES><br>
-        Build system red flags: <TMPL_VAR NAME=BAD><br>
-        Build system broken-ness: <TMPL_VAR NAME=BROKEN><br>
-        Build system looks like:<br>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Build System Analysis</title>
+<style type="text/css">
+body {
+    /*background-color: #030310;*/
+	background-color: #540606;
+	color: #FDFDFD;
+}
+.Image {
+	border: none;
+	box-shadow: 0px 0px 10px #DDDDED;
+}
+.Image:hover {
+	border: none;
+	box-shadow: 0px 0px 20px #DDDDED;
+}
+.Image:active {
+	border: none;
+	box-shadow: 0px 0px 20px #FFFFFF;
+}
+.Header {
+	font-size: 24px;
+	font-style: normal;
+	font-weight: bold;
+	padding-bottom: 10px;
+	padding-top: 5px;
+}
+.Item {
+	border-radius: 15px;
+	box-shadow: 0px 0px 10px #DDDDED;
+	color: #FDFCFC;
+	display: inline-block;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
+	text-align: center;
+}
+.ResultsHeader {
+	/*background-color: #905020;*/ /*Redish Brown*/
+	/*background-color: #5C3317;*/ /*Dark Brown*/
+	background-color: #060654;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: lighter;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	width: 300px;
+}
+.Results {
+	/*background-color: #444444;*/ /*Dark Grey*/
+	background-color: #062D54;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	font-size: 16px;
+	font-style: italic;
+	font-weight: lighter;
+	padding: 10px;
+	width: 300px;
+}
+</style>
+</head>
 
-            <img src="<TMPL_VAR NAME=IMAGE>">
-        </p>
-    </body>
+<body>
+<table align="center" border="0">
+	<tr>
+		<td align="center">
+			<div class="Header">
+				Build System Analysis
+			</div>
+		</td>
+	</tr>
+</table>
+<table align="center" border="0">
+	<tr>
+		<td align="center">
+			<div class="Item">
+				<div class="ResultsHeader">Build System Total Depth</div>
+				<div class="Results">6<!--<TMPL_VAR NAME=DEPTH>--></div>
+			</div>
+			<div class="Item">
+				<div class="ResultsHeader">File Most Depended On</div>
+				<div class="Results">testpad<!--<TMPL_VAR NAME=ACHILLES>--></div>
+			</div>
+			<div class="Item">
+				<div class="ResultsHeader">Build System Red Flags</div>
+				<div class="Results">chokepoints exist<!--<TMPL_VAR NAME=BAD>--></div>
+			</div>
+			<div class="Item">
+				<div class="ResultsHeader">Build System Broken-ness</div>
+				<div class="Results">none :)<!--<TMPL_VAR NAME=BROKEN>--></div>
+			</div>
+		</td>
+	</tr>
+</table>
+<table align="center" border="0">
+	<tr>
+		<td align="center">
+			<div class="Header">
+				Build System Graph
+			</div>
+		</td>
+	</tr>
+</table>
+<table align="center" border="0">
+	<tr>
+		<td align="center">
+			<a href="<TMPL_VAR NAME=IMAGE>"><img width="768" height="480" src="<TMPL_VAR NAME=IMAGE>"></a>
+		</td>
+	</tr>
+</table>
+</body>
 </html>
