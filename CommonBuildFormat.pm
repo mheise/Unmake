@@ -24,8 +24,6 @@ has 'tree' => (is => 'rw', isa => 'HashRef', default => sub { {} });
 has 'graph' => (is => 'ro', isa => 'GraphViz');
 has 'image' => (is => 'ro', isa => 'Str', default => 'build.png');
 has 'depth' => (is => 'rw', isa => 'Int', default => 0);
-has 'achilles' => (is => 'rw', isa => 'Str');
-has 'broken' => (is => 'rw', isa => 'Str');
 
 # housekeeping vars, will eventually be refactored out
 has 'deps' => (is => 'ro', isa => 'HashRef', default => sub { {} });
