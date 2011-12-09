@@ -4,6 +4,13 @@ use XML::TreePP;
 use GraphViz;                           # dirty! DIRTY!
 use Moose; # turns on strict and warnings, too! :)
 
+# NAME:         CommonBuildFormat.pm
+# AUTHORS:      Mike Heise
+# SYNOPSIS:     Class encapsulating the common build format
+# MODULE:       Parser
+# MODULE DATA:  None
+# Notes:        See below
+
 # nb. that this module still somewhat suffers from unwarranted familiarity of
 # subcomponents - eg. for the 2.0 release, the GraphViz code will be refactored
 # out of the the helper to the constructor to its own separate home, and the XML

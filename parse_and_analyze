@@ -6,6 +6,13 @@ use 5.010;
 use HTML::Template;                     # kind of dirty :(
 use CommonBuildFormat;
 
+# NAME:         parse_and_analyze
+# AUTHORS:      Mike Heise
+# SYNOPSIS:     Driver for parsing and analysis of makefile
+# MODULE:       Parser, analyzer
+# MODULE DATA:  None
+# Notes:        See below
+
 # driver program for parsing and analysis. originally only the parsing was done
 # in Perl and the analysis was all done in Lisp, with the Common Build Format
 # file as an intermediary, but the libraries for dealing with XML in Lisp were
