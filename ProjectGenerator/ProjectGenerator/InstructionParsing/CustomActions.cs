@@ -1,4 +1,22 @@
-﻿using System;
+﻿/*
+|| NAME:	CustomActions.cs
+||
+||
+||
+|| AUTHORS:	Frank Kotarski
+||
+|| SYNOPSIS:    A library of functions for dealing with Makefile rules. Analyzes the extension and the instructions
+||              to determine the best course of action (ie generate a new project, attach to an old project, ignore).
+||
+|| MODULE:	Project generator
+||
+|| MODULE DATA: 
+||		
+|| NOTES:       In Progress, Not Being Built
+||
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
