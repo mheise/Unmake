@@ -24,8 +24,24 @@ using System.Xml;
 
 namespace ProjectGenerator
 {
+    //Singleton- one XmlReader per application. This fits because we don't ever need to have more than 1 reader. Access the reader through the use of
+    // "instance" to get the available instance of the reader.
     public class XmlReader
     {
+        private static XmlReader instance;
+
+        public static XmlReader Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new XmlReader();
+                }
+                return instance;
+            }
+        }
+
         public void read(string absfilepath)
         {
             XmlTextReader reader = new XmlTextReader(absfilepath);
