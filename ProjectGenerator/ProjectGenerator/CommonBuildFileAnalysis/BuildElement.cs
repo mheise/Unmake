@@ -26,12 +26,16 @@ namespace ProjectGenerator
     {
         private string name;       //the unqualified name of the file with extension (ie main.cpp)
         private string extension; // the extension of the file  //is the file generated or static
-        private string instruction; //the literal instruction associated with building the file.
+        private string buildinstruction; //the literal instruction associated with building the file.
+        private List<string> prebuildinstructions; //the literal prebuild instructions associated with building the file.
+        private List<string> prelinkinstructions; //the literal prelink instructions associated with building the file.
+        private List<string> postbuildinstructions; //the literal postbuild instructions associated with building the file.
+
         public BuildElement(string vname, string vext, string vinstr)
         {
             this.name = vname;
             this.extension = vext;
-            this.instruction = vinstr;
+            this.buildinstruction = vinstr;
         }
         public override bool Equals(System.Object obj)
         {

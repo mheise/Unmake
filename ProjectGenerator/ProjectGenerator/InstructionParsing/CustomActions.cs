@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+|| NAME:	CustomActions.cs
+||
+||
+||
+|| AUTHORS:	Frank Kotarski
+||
+|| SYNOPSIS:    This is a static library of functions that will analyze build elements and produce a resolution
+||
+|| MODULE:	Project generator
+||
+|| MODULE DATA: 
+||		
+|| NOTES:   ToDo: integrate with the BuildElement class    
+||
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
