@@ -1,3 +1,7 @@
-To install the parser and analyzer components on a Unix-like system, simply
+To install the parser and analyzer components on a Unix-like system, first
+install from CPAN the modules HTML::Template, Makefile::Parser::GMakeDB,
+XML::TreePP, GraphViz, and Moose.
+
+Then, just make a symlink from /etc/perl/CommonBuildFormat.pm to CommonBuildFormat.pm and
 copy the files 'parse_and_analyze' and 'analysis.tmpl' to the build directory of
 the project you want to analyze and run 'parse_and_analyze'.
