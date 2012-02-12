@@ -5,13 +5,14 @@
 ||
 || AUTHORS:	Frank Kotarski
 ||
-|| SYNOPSIS:    This is a static library of functions that will analyze build elements and produce a resolution
+|| SYNOPSIS:    A library of functions for dealing with Makefile rules. Analyzes the extension and the instructions
+||              to determine the best course of action (ie generate a new project, attach to an old project, ignore).
 ||
 || MODULE:	Project generator
 ||
 || MODULE DATA: 
 ||		
-|| NOTES:   ToDo: integrate with the BuildElement class    
+|| NOTES:       In Progress, Not Being Built
 ||
 */
 
