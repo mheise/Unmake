@@ -1,113 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rule name="all">
-    <dep>tar</dep>
-    <dep>rmt</dep>
-    <dep>tar.info</dep>
-</rule>
-<rule name="tar">
-    <dep>tar.o</dep>
-    <dep>create.o</dep>
-    <dep>extract.o</dep>
-    <dep>buffer.o</dep>
-    <dep>getoldopt.o</dep>
-    <dep>update.o</dep>
-    <dep>gnu.o</dep>
-    <dep>mangle.o</dep>
-    <dep>version.o</dep>
-    <dep>list.o</dep>
-    <dep>names.o</dep>
-    <dep>diffarch.o</dep>
-    <dep>port.o</dep>
-    <dep>wildmat.o</dep>
-    <dep>getopt.o</dep>
-    <dep>getopt1.o</dep>
-    <dep>regex.o</dep>
-    <dep>getdate.o</dep>
-    <dep>rtapelib.o</dep>
-</rule>
-<rule name="tar.o">
-    <dep>regex.h</dep>
-    <dep>tar.c</dep>
-</rule>
-<rule name="regex.h"></rule>
-<rule name="tar.c"></rule>
-<rule name="create.o">
-    <dep>create.c</dep>
-</rule>
-<rule name="create.c"></rule>
-<rule name="extract.o">
-    <dep>extract.c</dep>
-</rule>
-<rule name="extract.c"></rule>
-<rule name="buffer.o">
-    <dep>regex.h</dep>
-    <dep>buffer.c</dep>
-</rule>
-<rule name="regex.h"></rule>
-<rule name="buffer.c"></rule>
-<rule name="getoldopt.o">
-    <dep>getoldopt.c</dep>
-</rule>
-<rule name="getoldopt.c"></rule>
-<rule name="update.o">
-    <dep>update.c</dep>
-</rule>
-<rule name="update.c"></rule>
-<rule name="gnu.o">
-    <dep>gnu.c</dep>
-</rule>
-<rule name="gnu.c"></rule>
-<rule name="mangle.o">
-    <dep>mangle.c</dep>
-</rule>
-<rule name="mangle.c"></rule>
-<rule name="version.o">
-    <dep>version.c</dep>
-</rule>
-<rule name="version.c"></rule>
-<rule name="list.o">
-    <dep>list.c</dep>
-</rule>
-<rule name="list.c"></rule>
-<rule name="names.o">
-    <dep>names.c</dep>
-</rule>
-<rule name="names.c"></rule>
-<rule name="diffarch.o">
-    <dep>diffarch.c</dep>
-</rule>
-<rule name="diffarch.c"></rule>
-<rule name="port.o">
-    <dep>port.c</dep>
-</rule>
-<rule name="port.c"></rule>
-<rule name="wildmat.o">
-    <dep>wildmat.c</dep>
-</rule>
-<rule name="wildmat.c"></rule>
-<rule name="getopt.o">
-    <dep>getopt.c</dep>
-</rule>
-<rule name="getopt.c"></rule>
-<rule name="getopt1.o">
-    <dep>getopt1.c</dep>
-</rule>
-<rule name="getopt1.c"></rule>
-<rule name="regex.o">
-    <dep>regex.h</dep>
-    <dep>regex.c</dep>
-</rule>
-<rule name="regex.h"></rule>
-<rule name="regex.c"></rule>
-<rule name="getdate.o">
-    <dep>getdate.c</dep>
-</rule>
-<rule name="rtapelib.o">
-    <dep>rtapelib.c</dep>
-</rule>
-<rule name="rmt">
-    <dep>rmt.c</dep>
-</rule>
-<rule name="tar.info">
-    <dep>tar.texinfo</dep>
-</rule>
+<build>
+    <rule name="all">
+        <dep>tar</dep>
+        <dep>rmt</dep>
+        <dep>tar.info</dep>
+    </rule>
+    <rule name="tar">
+        <dep>tar.o</dep>
+        <dep>create.o</dep>
+        <dep>extract.o</dep>
+        <dep>buffer.o</dep>
+        <dep>getoldopt.o</dep>
+        <dep>update.o</dep>
+        <dep>gnu.o</dep>
+        <dep>mangle.o</dep>
+        <dep>version.o</dep>
+        <dep>list.o</dep>
+        <dep>names.o</dep>
+        <dep>diffarch.o</dep>
+        <dep>port.o</dep>
+        <dep>wildmat.o</dep>
+        <dep>getopt.o</dep>
+        <dep>getopt1.o</dep>
+        <dep>regex.o</dep>
+        <dep>getdate.o</dep>
+        <dep>rtapelib.o</dep>
+    </rule>
+    <rule name="tar.o">
+        <dep>regex.h</dep>
+        <dep>tar.c</dep>
+    </rule>
+    <rule name="regex.h"></rule>
+    <rule name="tar.c"></rule>
+    <rule name="create.o">
+        <dep>create.c</dep>
+    </rule>
+    <rule name="create.c"></rule>
+    <rule name="extract.o">
+        <dep>extract.c</dep>
+    </rule>
+    <rule name="extract.c"></rule>
+    <rule name="buffer.o">
+        <dep>regex.h</dep>
+        <dep>buffer.c</dep>
+    </rule>
+    <rule name="regex.h"></rule>
+    <rule name="buffer.c"></rule>
+    <rule name="getoldopt.o">
+        <dep>getoldopt.c</dep>
+    </rule>
+    <rule name="getoldopt.c"></rule>
+    <rule name="update.o">
+        <dep>update.c</dep>
+    </rule>
+    <rule name="update.c"></rule>
+    <rule name="gnu.o">
+        <dep>gnu.c</dep>
+    </rule>
+    <rule name="gnu.c"></rule>
+    <rule name="mangle.o">
+        <dep>mangle.c</dep>
+    </rule>
+    <rule name="mangle.c"></rule>
+    <rule name="version.o">
+        <dep>version.c</dep>
+    </rule>
+    <rule name="version.c"></rule>
+    <rule name="list.o">
+        <dep>list.c</dep>
+    </rule>
+    <rule name="list.c"></rule>
+    <rule name="names.o">
+        <dep>names.c</dep>
+    </rule>
+    <rule name="names.c"></rule>
+    <rule name="diffarch.o">
+        <dep>diffarch.c</dep>
+    </rule>
+    <rule name="diffarch.c"></rule>
+    <rule name="port.o">
+        <dep>port.c</dep>
+    </rule>
+    <rule name="port.c"></rule>
+    <rule name="wildmat.o">
+        <dep>wildmat.c</dep>
+    </rule>
+    <rule name="wildmat.c"></rule>
+    <rule name="getopt.o">
+        <dep>getopt.c</dep>
+    </rule>
+    <rule name="getopt.c"></rule>
+    <rule name="getopt1.o">
+        <dep>getopt1.c</dep>
+    </rule>
+    <rule name="getopt1.c"></rule>
+    <rule name="regex.o">
+        <dep>regex.h</dep>
+        <dep>regex.c</dep>
+    </rule>
+    <rule name="regex.h"></rule>
+    <rule name="regex.c"></rule>
+    <rule name="getdate.o">
+        <dep>getdate.c</dep>
+    </rule>
+    <rule name="rtapelib.o">
+        <dep>rtapelib.c</dep>
+    </rule>
+    <rule name="rmt">
+        <dep>rmt.c</dep>
+    </rule>
+    <rule name="tar.info">
+        <dep>tar.texinfo</dep>
+    </rule>
+</build>
