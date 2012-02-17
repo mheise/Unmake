@@ -49,7 +49,7 @@ sub make_template {
     my %args = @_;
     open my $htmlfh, '>', 'build.html';
 
-    my $template = HTML::Template->new(filename => 'analysis.tmpl');
+    my $template = HTML::Template->new(filename => 'report.tmpl');
     $template->param(DEPTH => $args{depth});
     $template->param(ACHILLES => $args{achilles} // 'nothing');
     $template->param(BROKEN => $args{broken} // 'none :)');
