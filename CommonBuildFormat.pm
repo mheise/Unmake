@@ -20,7 +20,7 @@ use Moose; # turns on strict and warnings, too! :)
 
 # true instance vars
 has 'ast' => (is => 'rw', isa => 'Makefile::AST', required => 1);
-has 'tree' => (is => 'rw', isa => 'HashRef', default => sub { {} });
+has 'tree' => (is => 'rw', isa => 'HashRef', default => sub { {build => {}} });
 has 'graph' => (is => 'ro', isa => 'GraphViz');
 has 'image' => (is => 'ro', isa => 'Str', default => 'build.png');
 has 'depth' => (is => 'rw', isa => 'Int', default => 0);
@@ -32,9 +32,10 @@ has 'edges' => (is => 'ro', isa => 'HashRef', default => sub { {} });
 sub BUILD {
     # custom section of the constructor, gets called automatically by the ctor
     # nb 'all' is the default target for plain calls to 'make', and thus the
-    # root of the build tree we care about
+    # root of the build tree we care about, and also nb. the hack here to put
+    # everything inside a <build> element
     my $self = shift;
-    $self->depth(_traverse($self, $self->ast, $self->tree, 'all', 0));
+    $self->depth(_traverse($self, $self->ast, $self->tree->{build}, 'all', 0));
 }
 
 sub _traverse {
