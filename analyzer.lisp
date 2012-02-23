@@ -18,9 +18,9 @@
   whole shebang."
   (labels
     ((rule-name (rule)
-       (car(cdaadr rule)))
+       (intern (car (cdaadr rule))))
      (dep-name (dep)
-       (caddr dep))
+       (intern (caddr dep)))
      (rule-deps (rule)
        (mapcar #'dep-name (cddr rule))))
 
