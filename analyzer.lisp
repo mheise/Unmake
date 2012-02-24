@@ -37,5 +37,7 @@
 
 (defun analyze (cbf-file)
   "Analyze and report on the properties of a Common Build Format file"
+  (if (eq cbf-file nil) (setf cbf-file "cbf.xml"))
+
   (format t "Report for the build system described in ~a: ~&" cbf-file)
   (format t "    Number of rules: ~d ~&" (count-rules (to-sexpr cbf-file))))
