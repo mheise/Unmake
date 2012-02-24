@@ -1,6 +1,8 @@
+all:
+	sbcl --load wrap-analyzer.lisp
+
 clean:
-	rm build.html build.png
+	rm build.html build.png analyze
 
 test:
 	perl t/*.t
-	sbcl --load wrap-analyzer.lisp
