@@ -21,7 +21,7 @@ like(ref $cbf->deps, qr/HASH/, "Internal dependency tracking correctly set up");
 like(ref $cbf->edges, qr/HASH/, "Internal edge tracking correctly set up");
 
 like(ref $cbf->tree, qr/HASH/, "Internal tree correctly set up");
-like($cbf->tree->{rule}, qr/ARRAY/, "Internal tree sane");
+like($cbf->tree->{build}{rule}, qr/ARRAY/, "Internal tree sane");
 ok($cbf->depth == 3, "Depth calculated correctly");
 
 done_testing();
