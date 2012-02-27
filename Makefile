@@ -1,4 +1,6 @@
-all:
+all: analyzer
+
+analyzer: analyzer.lisp wrap-analyzer.lisp
 	sbcl --load wrap-analyzer.lisp
 
 clean:
