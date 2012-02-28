@@ -1,0 +1,31 @@
+In addition to the mandatory best practices, the four optional ones we chose
+were:
+
+    #6 - Build Tools
+            We used Visual Studio's XML-based build format for the project
+            generator.  The files can be inspected at 
+            ProjectGenerator/ProjectGenerator.sln and
+            ProjectGenerator/ProjectGenerator/ProjectGenerator.csproj .
+
+            We used a Makefile for the parser/analyzer (if you think about it,
+            this is pretty meta; thankfully, we have little to build for this
+            component and the file itself is nearly trivial, doing only cleanup
+            of transient files that exist during testing). 
+
+    #7 - Unit tests
+            We used the Test Anything Protocol (TAP) standard for unit tests,
+            via Perl's Test::More library.  The tests are in the t/ directory.
+            Additionally, the 'prove' utility (which should be installed with
+            any recent version of Perl) can be used to automatically run all the
+            tests and print a report of the results.
+
+    #8 - Mock Objects
+            We used the CPAN module Test::MockObject to facilitate object
+            mocking for unit testing purposes.
+
+    #11- Third-Party Component
+            We used many third-party components.  The largest was the CPAN
+            module Makefile::Parser::GMakeDB .  We also used the open-source
+            graph visualization tool GraphViz (and its accompanying CPAN
+            module), XML::TreePP, and HTML::Template.  These open-source
+            libraries can all be browsed via http://search.cpan.org . 

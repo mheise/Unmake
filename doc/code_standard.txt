@@ -1,0 +1,14 @@
+For C#, we have adopted the MSDN coding standards.
+
+
+For ASP, we have adopted MSDN's VBScript coding conventions.
+
+For Perl, we have adopted the language's conventional coding standard as
+documented in `perldoc perlstyle`, with the addendum that Moose's coding
+conventions apply to all object-oriented code.
+
+
+
+For all languages, we have adopted the documentation standard that the header on
+our group's Google Docs should be included for all driver and library files (ie.
+everything but tests and auxiliary files).

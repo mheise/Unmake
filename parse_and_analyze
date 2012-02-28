@@ -3,70 +3,53 @@ use warnings;
 use strict;
 use 5.010;
 
-use Makefile::Parser::GmakeDB;
-use GraphViz;                           # dirty! DIRTY!
-use HTML::Template;                     # ditto :(
-use XML::TreePP;
+use HTML::Template;                     # kind of dirty :(
+use CommonBuildFormat;
 
-# parse
+# NAME:         parse_and_analyze
+# AUTHORS:      Mike Heise
+# SYNOPSIS:     Driver for parsing and analysis of makefile
+# MODULE:       Parser, analyzer
+# MODULE DATA:  None
+# Notes:        See below
+
+# driver program for parsing and analysis. originally only the parsing was done
+# in Perl and the analysis was all done in Lisp, with the Common Build Format
+# file as an intermediary, but the libraries for dealing with XML in Lisp were
+# difficult to get to install on the system this was built on, so the analysis
+# was brought back to Perl in the interest of getting a working product. In a
+# future release, this will be fixed, as Perl is nice but Lisp really shines for
+# graph inspection and manipulation.
+
+# parse. i love leveraging existing libraries!
 my $db_listing = `make --print-data-base -pqRrs -f Makefile`;
 my $ast = Makefile::Parser::GmakeDB->parse(\$db_listing);
 
 # walk our AST an analyze it
-my ($image, $depth, $achilles, $broken) = ('build.png', 0, undef, undef);
-our $g = GraphViz->new; # blarg
-our %deps;
-our %edges;
+my $cbf = CommonBuildFormat->new(ast => $ast, graph => GraphViz->new);
 
-my $tree = {};
-$depth = traverse($ast, $tree, 'all', 0);
 my $tpp = XML::TreePP->new;
-my $xml = $tpp->write($tree);
+$tpp->set(indent => 4, output_encoding => 'UTF-8');
+my $xml = $tpp->write($cbf->tree);
 print $xml;
 
-my @ordered_deps = sort {$deps{$b} <=> $deps{$a}} keys %deps;
-make_template(  depth => $depth,
-                achilles => $ordered_deps[0],
-                broken => $broken,
-                bad => ($deps{$ordered_deps[0]} > 5 ? 'chokepoints exist' : 0),
-                image => $image,
+my @ordered_deps = sort {$cbf->deps->{$b} <=> $cbf->deps->{$a}} keys
+                                                                %{$cbf->deps};
+make_template(  depth => $cbf->depth,
+                achilles => $ordered_deps[0] // undef,
+                broken => (defined $ordered_deps[0] ? undef : "make couldn't read makefile sensibly"),
+                bad => ($cbf->deps->{$ordered_deps[0]} > 2 ? 'chokepoints exist' : 0),
+                image => $cbf->image,
 );
-open my $imgfh, '>', $image;
-print $imgfh $g->as_png;
+open my $imgfh, '>', $cbf->image;
+print $imgfh $cbf->graph->as_png;
 
-# =============================================================================
-# Here endeth the procedural section, and beginneth function defs
-# ============================================================================
-
-sub traverse {
-    my ($ast, $tree, $nodename, $depth) = @_;
-    my ($node) = grep {$_->target eq $nodename} @{$ast->explicit_rules};
-    my $greatest = $depth;
-
-    if (defined $node) {
-        my $parent = $node->target;
-        $g->add_node($parent);
-        $tree->{$parent} = {dep => []};
-        for my $child (@{$node->{normal_prereqs}}, @{$node->{ordered_prereqs}}) {
-            if (! $edges{$parent}{$child}) {
-                $edges{$parent}{$child} = 1;
-                $g->add_edge($parent, $child);
-                push @{$tree->{$parent}->{dep}}, $child;
-                my $cur = traverse($ast, $tree, $child, $depth + 1);
-                $greatest = ($cur > $greatest ? $cur : $greatest);
-            }
-            $deps{$child} = (defined $deps{$child} ? $deps{$child}+1 : 1);
-        }
-    }
-
-    return ($depth > $greatest ? $depth : $greatest);
-}
-
+# End of procedural section, beginning of helper functions
 sub make_template {
     my %args = @_;
     open my $htmlfh, '>', 'build.html';
 
-    my $template = HTML::Template->new(filename => 'analysis.tmpl');
+    my $template = HTML::Template->new(filename => 'report.tmpl');
     $template->param(DEPTH => $args{depth});
     $template->param(ACHILLES => $args{achilles} // 'nothing');
     $template->param(BROKEN => $args{broken} // 'none :)');
@@ -75,4 +58,3 @@ sub make_template {
 
     print $htmlfh $template->output;
 }
-

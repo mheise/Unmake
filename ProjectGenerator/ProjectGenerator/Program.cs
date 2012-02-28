@@ -32,16 +32,16 @@ namespace ProjectGenerator
         {
             //Initialize singleton generator
             VSGen vcprojgen = new VSGen();
-            XmlReader reader = new XmlReader();
+            XmlReader reader = XmlReader.Instance;
             reader.readbuildfile("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\ProjectGenerator\\Sample_Build_System\\cbf.xml");
-            vcprojgen.CreateTestSolution(@"C:\temp\FooBar", "Foo");
-            vcprojgen.CreateTestProject(@"C:\temp\FooBarFoo.sln", "myproj", VSGen.TestProjectType.Acceptance);
+            //vcprojgen.CreateTestSolution(@"C:\temp\FooBar", "Foo");
+            //vcprojgen.CreateTestProject(@"C:\temp\FooBarFoo.sln", "myproj", VSGen.TestProjectType.Acceptance);
            
-            /*
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-             * */
+             
         }
     }
 }
