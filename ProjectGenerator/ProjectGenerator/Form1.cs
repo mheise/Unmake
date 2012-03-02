@@ -36,12 +36,11 @@ namespace ProjectGenerator
         private void button1_Click(object sender, EventArgs e)
         {
             //this is also horrible practice, and will be fixed after the demo
-            VSGen vcprojgen = new VSGen();
             CmakeGen cgen = new CmakeGen();             
             XmlReader reader = XmlReader.Instance;
             KeyValuePair<Graph<string>,Dictionary<string,BuildElement> > buildinfo = new KeyValuePair<Graph<string>,Dictionary<string,BuildElement> >();
             buildinfo = reader.readbuildfile(textBox2.Text+"\\cbf.xml");
-            cgen.CreateCmakeList(textBox2.Text,"cmakelist.txt",buildinfo.Value, buildinfo.Key);
+            cgen.CreateCmakeList(textBox2.Text,"CMakeLists.txt",buildinfo.Value, buildinfo.Key);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -55,6 +54,16 @@ namespace ProjectGenerator
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }
