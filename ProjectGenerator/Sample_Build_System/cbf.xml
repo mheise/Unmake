@@ -1,22 +1,22 @@
 <cbf>
-  <buildsystem category="Scopes">
+  <buildsystem>
+  <category>Dependencies</category>
 	<graph>
-		<node name="hellomake.exe">
+		<node><output>hellomake.exe</output>
 		<data>gcc -o hellomake hellomake.c hellofunc.c -I.</data>
 		</node>
-		<node name="hellomake.c">	
+		<node> <sourcefile>hellomake.c</sourcefile>
 		</node>
-		<node name="hellofunc.c"> 	
+		<node><sourcefile>hellofunc.c</sourcefile>
 		</node>
-		<node name="hellomake.h"> 	
+		<node> <sourcefile>hellomake.h</sourcefile>
 		</node>
-		<edge source="hellomake.exe" target="hellomake.c" />
-		<edge source="hellomake.exe" target="hellofunc.c"/>
-		<edge source="hellomake.c" target="hellomake.h"/>
+		<edge> <source>hellomake.exe</source> <target>hellomake.c</target> </edge>
+		<edge> <source>hellomake.exe"</source> <target>hellofunc.c</target></edge>
+		<edge> <source>hellomake.c</source> <target>hellomake.h</target></edge>
 	</graph>
-  </buildsystem>
-  
-  <buildsystem category="GlobalRules">
+ 
+  <category>GlobalRules</category>
   </buildsystem>
 
 </cbf>
