@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<buildsystem>
+    <file name="all">
+        <dep>hello</dep>
+    </file>
+    <file name="hello">
+        <dep>main.o</dep>
+        <dep>factorial.o</dep>
+        <dep>hello.o</dep>
+    </file>
+    <file name="main.o">
+        <dep>main.cpp</dep>
+    </file>
+    <file name="factorial.o">
+        <dep>factorial.cpp</dep>
+    </file>
+    <file name="hello.o">
+        <dep>hello.cpp</dep>
+        <dep>stupid</dep>
+    </file>
+    <file name="stupid">
+        <dep>hello.o</dep>
+    </file>
+    <file name="hello.o"></file>
+</buildsystem>
