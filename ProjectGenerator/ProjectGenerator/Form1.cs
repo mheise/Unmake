@@ -23,7 +23,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using ProjectGenerator;
 namespace ProjectGenerator
 {
     public partial class Form1 : Form
@@ -35,7 +35,13 @@ namespace ProjectGenerator
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            //this is also horrible practice, and will be fixed after the demo
+            VSGen vcprojgen = new VSGen();
+            CmakeGen cgen = new CmakeGen();             
+            XmlReader reader = XmlReader.Instance;
+            KeyValuePair<Graph<string>,Dictionary<string,BuildElement> > buildinfo = new KeyValuePair<Graph<string>,Dictionary<string,BuildElement> >();
+            buildinfo = reader.readbuildfile(textBox2.Text+"\\cbf.xml");
+            cgen.CreateCmakeList(textBox2.Text,"cmakelist.txt",buildinfo.Value, buildinfo.Key);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

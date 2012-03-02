@@ -53,9 +53,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CommonBuildFileAnalysis\BuildElement.cs" />
+    <Compile Include="InstructionParsing\CustomActionsBare.cs" />
     <Compile Include="InstructionParsing\InstructionParser.cs" />
     <Compile Include="CommonBuildFileAnalysis\Graph.cs" />
     <Compile Include="CommonBuildFileAnalysis\Scope.cs" />
+    <Compile Include="ProjectGeneration\Cmake_Generation\CmakeResolver.cs" />
+    <Compile Include="ProjectGeneration\Cmake_Generation\CmakeGen.cs" />
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -64,11 +67,11 @@
     </Compile>
     <Compile Include="ProjectGeneration\VS_COM_Generation\VSGen.cs" />
     <Compile Include="CommonBuildFileAnalysis\XmlReader.cs" />
-    <Compile Include="ProjectGeneration\VS_XML_Generation\TextReader.cs" />
-    <Compile Include="ProjectGeneration\VS_XML_Generation\IXMLFile.cs" />
+    <Compile Include="ProjectGeneration\TextIO\TextReader.cs" />
+    <Compile Include="ProjectGeneration\TextIO\IXMLFile.cs" />
     <Compile Include="ProjectGeneration\VS_COM_Generation\VSSolution.cs" />
     <Compile Include="ProjectGeneration\VS_COM_Generation\VSProject.cs" />
-    <Compile Include="ProjectGeneration\VS_XML_Generation\TextWriter.cs" />
+    <Compile Include="ProjectGeneration\TextIO\TextWriter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,8 +153,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ProjectGeneration\Cmake_Generation\" />
-    <Folder Include="ProjectGeneration\VS_XML_Generation\ObjCalisthenics\" />
+    <Folder Include="ProjectGeneration\TextIO\ObjCalisthenics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
