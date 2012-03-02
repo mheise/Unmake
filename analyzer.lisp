@@ -96,7 +96,7 @@
   (if (eq cbf-file nil) (setf cbf-file "cbf.xml"))
   (let ((cbf-sexpr (to-sexpr cbf-file)))
     (format t "Report for the build system described in ~a: ~&" cbf-file)
-    (format t "    Number of rules: ~d ~&" (count-rules cbf-sexpr))
+    (format t "    Number of files: ~d ~&" (count-rules cbf-sexpr))
     (let ((dft-result (depth-first-traverse (to-alist cbf-sexpr))))
       (format t "    Build graph is ~a ~&"
               (if (car dft-result)
