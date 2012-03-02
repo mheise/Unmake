@@ -20,7 +20,7 @@ use Moose; # turns on strict and warnings, too! :)
 
 # true instance vars
 has 'ast' => (is => 'rw', isa => 'Makefile::AST', required => 1);
-has 'tree' => (is => 'rw', isa => 'HashRef', default => sub { {build => {}} });
+has 'tree' => (is => 'rw', isa => 'HashRef', default => sub { {buildsystem => {}} });
 has 'graph' => (is => 'ro', isa => 'GraphViz');
 has 'image' => (is => 'ro', isa => 'Str', default => 'build.png');
 has 'depth' => (is => 'rw', isa => 'Int', default => 0);
@@ -35,7 +35,7 @@ sub BUILD {
     # root of the build tree we care about, and also nb. the hack here to put
     # everything inside a <build> element
     my $self = shift;
-    $self->depth(_traverse($self, $self->ast, $self->tree->{build}, 'all', 0));
+    $self->depth(_traverse($self, $self->ast, $self->tree->{buildsystem}, 'all', 0));
 }
 
 sub _traverse {
@@ -49,19 +49,19 @@ sub _traverse {
     my ($self, $ast, $tree, $nodename, $depth) = @_;
     my ($node) = grep {$_->target eq $nodename} @{$ast->explicit_rules};
     my $greatest = $depth;
-    $tree->{rule} = [] unless exists $tree->{rule};
+    $tree->{file} = [] unless exists $tree->{file};
 
     if (defined $node) {
         my $parent = $node->target;
         $self->graph->add_node($parent);
-        push @{$tree->{rule}}, {"-name" => $parent, dep => []};
+        push @{$tree->{file}}, {"-name" => $parent, dep => []};
         #consider keeping track of this ref instead of grepping for it later
         for my $child (@{$node->{normal_prereqs}}, @{$node->{ordered_prereqs}}) {
             if (! $self->edges->{$parent}{$child}) {
                 $self->edges->{$parent}{$child} = 1;
                 $self->graph->add_edge($parent, $child);
                 my $elem = (grep {$_->{"-name"} eq $parent}
-                    @{$tree->{rule}})[0];
+                    @{$tree->{file}})[0];
                 push @{$elem->{dep}}, $child;
                 my $cur = _traverse($self, $ast, $tree, $child, $depth + 1);
                 $greatest = ($cur > $greatest ? $cur : $greatest);

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<build>
-    <rule name="all">
+<buildsystem>
+    <file name="all">
         <dep>hello</dep>
-    </rule>
-    <rule name="hello">
+    </file>
+    <file name="hello">
         <dep>main.o</dep>
         <dep>factorial.o</dep>
         <dep>hello.o</dep>
-    </rule>
-    <rule name="main.o">
+    </file>
+    <file name="main.o">
         <dep>main.cpp</dep>
-    </rule>
-    <rule name="factorial.o">
+    </file>
+    <file name="factorial.o">
         <dep>factorial.cpp</dep>
-    </rule>
-    <rule name="hello.o">
+    </file>
+    <file name="hello.o">
         <dep>hello.cpp</dep>
-    </rule>
-</build>
+    </file>
+</buildsystem>
