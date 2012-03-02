@@ -150,6 +150,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ProjectGeneration\Cmake_Generation\" />
     <Folder Include="ProjectGeneration\VS_XML_Generation\ObjCalisthenics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
