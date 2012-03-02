@@ -65,12 +65,9 @@
     <Compile Include="UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectGeneration\VS_COM_Generation\VSGen.cs" />
     <Compile Include="CommonBuildFileAnalysis\XmlReader.cs" />
     <Compile Include="ProjectGeneration\TextIO\TextReader.cs" />
     <Compile Include="ProjectGeneration\TextIO\IXMLFile.cs" />
-    <Compile Include="ProjectGeneration\VS_COM_Generation\VSSolution.cs" />
-    <Compile Include="ProjectGeneration\VS_COM_Generation\VSProject.cs" />
     <Compile Include="ProjectGeneration\TextIO\TextWriter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -154,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ProjectGeneration\TextIO\ObjCalisthenics\" />
+    <Folder Include="ProjectGeneration\VS_COM_Generation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
