@@ -32,8 +32,8 @@
 (defun to-hash (cbf-sexpr)
   (let ((spine (make-hash-table)))
     (mapc (lambda (rule)
-              (setf (gethash (car (munge-rule rule)) spine)
-                    (cdr (munge-rule rule)))) cbf-sexpr)
+            (setf (gethash (car (munge-rule rule)) spine)
+                  (cdr (munge-rule rule)))) cbf-sexpr)
     spine ))
 
 (defun count-rules (cbf-sexpr)
@@ -43,16 +43,29 @@
     (+ 1 (count-rules (cdr cbf-sexpr)))))
 
 (defun depth-first-traverse (alist)
-  "Performs a DFT of the given alist, returning a cons of (cyclicp . build-order)
+  "Performs a DFT (more accurately an exploration) of the given alist, returning
+  a cons of (cyclicp . build-order)
   where cyclicp represents whether the dependency graph represented by alist
   contains any cycles, and build-order is a list representing what you'd expect."
-  (let ((head (caar alist)))
-    (flet ((dft (alist node)
-             "recursive helper function"
-             ;TODO: implement (build-order should just be reverse of pre-order)
-             (cons nil (cons alist node)) ;placeholder
-             ))
-      (dft alist head))))
+  (let ((head (caar alist))
+        (visited   (make-hash-table))
+        (previsit  (make-hash-table))
+        (postvisit (make-hash-table))
+        (cyclicp nil)
+        (tick 0))
+    (labels
+      ((explore (node)
+         (setf (gethash node visited) t)
+         (setf (gethash node previsit) (incf tick))
+         (mapc (lambda (u)
+                 (if (eq t (gethash u visited))
+                   nil
+                   (explore u)))
+               (cadr (assoc node alist)))
+         (setf (gethash node postvisit) (incf tick))
+         nil))
+    (explore head))
+  (cons cyclicp postvisit))) ;TODO update cyclicp, actually order from postvisit
 
 (defun analyze (cbf-file)
   "Analyze and report on the properties of a Common Build Format file"
