@@ -51,10 +51,22 @@
         (visited   (make-hash-table))
         (previsit  (make-hash-table))
         (postvisit (make-hash-table))
-        (cyclicp nil)
         (tick 0))
     (labels
-      ((explore (node)
+      ((cycles-present ()
+         (let ((cyclicp nil)
+               (files (mapcar #'car alist)))
+               (mapc (lambda (file)
+                 (mapc (lambda (dep)
+                         (if (and (< (gethash dep  previsit) ;back edge
+                                     (gethash file previsit))
+                                  (> (gethash dep  postvisit)
+                                     (gethash file postvisit)))
+                           (setf cyclicp t)))
+                       (cadr (assoc file alist))))
+               files)
+         cyclicp))
+       (explore (node)
          (setf (gethash node visited) t)
          (setf (gethash node previsit) (incf tick))
          (mapc (lambda (u)
@@ -69,7 +81,7 @@
                            collect key)))
            (sort keys #'< :key (lambda (file) (gethash file postvisit-hash))))))  
     (explore head)
-  (cons cyclicp (list (build-order postvisit)))))) ;TODO update cyclicp
+  (cons (cycles-present) (list (build-order postvisit)))))) ;TODO update cyclicp
 
 (defun analyze (cbf-file)
   "Analyze and report on the properties of a Common Build Format file"
@@ -78,8 +90,11 @@
     (format t "Report for the build system described in ~a: ~&" cbf-file)
     (format t "    Number of rules: ~d ~&" (count-rules cbf-sexpr))
     (let ((dft-result (depth-first-traverse (to-alist cbf-sexpr))))
-      (format t "    Build graph ~a cyclic ~&"
+      (format t "    Build graph is ~a ~&"
               (if (car dft-result)
-                "is"
-                "is not"))
-      (format t "    Optimal build order is ~a" (cdr dft-result)))))
+                "cyclic :("
+                "acyclic :)"))
+      (format t "    Optimal build order is ~a ~&"
+              (if (car dft-result)
+                "nonexistent"
+                (cdr dft-result))))))
