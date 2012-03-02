@@ -5,11 +5,11 @@
 		<node><output>hellomake.exe</output>
 		<data>gcc -o hellomake hellomake.c hellofunc.c -I.</data>
 		</node>
-		<node> <output>hellomake.c</output>
+		<node> <sourcefile>hellomake.c</sourcefile>
 		</node>
-		<node><output>hellofunc.c</output>
+		<node><sourcefile>hellofunc.c</sourcefile>
 		</node>
-		<node> <output>hellomake.h</output>
+		<node> <sourcefile>hellomake.h</sourcefile>
 		</node>
 		<edge> <source>hellomake.exe</source> <target>hellomake.c</target> </edge>
 		<edge> <source>hellomake.exe"</source> <target>hellofunc.c</target></edge>
