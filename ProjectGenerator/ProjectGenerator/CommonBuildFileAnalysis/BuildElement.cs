@@ -30,6 +30,7 @@ namespace ProjectGenerator
         private List<string> prebuildinstructions; //the literal prebuild instructions associated with building the file.
         private List<string> prelinkinstructions; //the literal prelink instructions associated with building the file.
         private List<string> postbuildinstructions; //the literal postbuild instructions associated with building the file.
+        private List<BuildElement> dependencies;
 
         public BuildElement(string vname, string vext, string vinstr)
         {

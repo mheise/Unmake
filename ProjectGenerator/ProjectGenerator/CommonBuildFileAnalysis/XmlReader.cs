@@ -85,7 +85,7 @@ namespace ProjectGenerator
             string instruction = "";
             string source = "";
             string target = "";
-
+            bool dep = false;
             try
             {
                 while (reader.Read())
@@ -95,54 +95,45 @@ namespace ProjectGenerator
                     {
                         case XmlNodeType.Element: // The node is an element.
                             Console.Write("<" + reader.Name);
-                            if (reader.Name == "node")
+                            if (reader.Name == "file")
                             {
                                 while (reader.MoveToNextAttribute())// Read the attributes.
                                 {
                                     if (reader.Name == "name")
                                     {
                                         name = reader.Value;
+                                        source = reader.Value;
                                         extension = System.IO.Path.GetExtension(reader.Value);
+                                       // buildgraph.AddNode(name);
+                                        buildelements.Add(name, new BuildElement(name, extension, instruction));
                                     }
                                     Console.Write(" " + reader.Name + "='" + reader.Value + "'");
                                 }
                             }
-                            if (reader.Name == "edge")
+                            if (reader.Name == "dep")
                             {
-                                while (reader.MoveToNextAttribute())// Read the attributes.
-                                {
-                                    if (reader.Name == "source")
-                                    {
-                                        source = reader.Value;
-                                    }
-                                    else if (reader.Name == "target")
-                                    {
-                                        target = reader.Value;
-                                    }
-
-                                    //Console.Write(" " + reader.Name + "='" + reader.Value + "'");
-                                }
-                                buildgraph.AddDirectedEdge(new GraphNode<string>(source), new GraphNode<string>(target), 1);
-                                source = "";
-                                target = "";
+                                dep = true;
                             }
     
                             
                             Console.WriteLine(">");
                             break;
                         case XmlNodeType.Text: //Display the text in each element.
-                            instruction = reader.Value;
+                            if (dep)
+                            {
+                                target = reader.Value;
+                                if (!buildgraph.Contains(source))
+                                    buildgraph.AddNode(source);
+                                if (!buildgraph.Contains(target))
+                                    buildgraph.AddNode(target);
+                                buildgraph.AddDirectedEdge((GraphNode<string>)buildgraph.GetNode(source), (GraphNode<string>)buildgraph.GetNode(target), 1);
+                                //buildgraph.AddDirectedEdge(new GraphNode<string>(source), new GraphNode<string>(target), 1);
+                                target = "";
+                                dep = false;
+                            }
                             Console.WriteLine(reader.Value);
                             break;
                         case XmlNodeType.EndElement: //Display the end of the element.
-                            if (reader.Name == "node")
-                            {
-                                buildgraph.AddNode(name);
-                                buildelements.Add(name, new BuildElement(name, extension, instruction));
-                                name = "";
-                                extension = "";
-                                instruction = "";
-                            }
                             Console.Write("</" + reader.Name);
                             Console.WriteLine(">");
                             break;
@@ -152,7 +143,7 @@ namespace ProjectGenerator
 
             catch (Exception e)
             {
-                Console.WriteLine("Exception in XmlReader");
+                Console.WriteLine("Exception in XmlReader: "+e.Message);
             }
             return new KeyValuePair<Graph<string>, Dictionary<string, BuildElement>>(buildgraph, buildelements);
         }

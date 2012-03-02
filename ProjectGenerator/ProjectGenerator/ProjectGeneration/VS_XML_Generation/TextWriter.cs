@@ -23,7 +23,7 @@ using System.Text;
 
 namespace ProjectGenerator
 {
-    class WriteTextFile
+    class TextWriter
     {
         static void writetest()
         {

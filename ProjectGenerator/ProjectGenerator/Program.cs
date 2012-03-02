@@ -30,10 +30,10 @@ namespace ProjectGenerator
         [STAThread]
         static void Main(string[] args)
         {
-            //Initialize singleton generator
+            //Initialize singleton generators
             VSGen vcprojgen = new VSGen();
             XmlReader reader = XmlReader.Instance;
-            reader.readbuildfile("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\ProjectGenerator\\Sample_Build_System\\cbf.xml");
+            reader.readbuildfile("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\ProjectGenerator\\Sample_Build_System_2\\cbf.xml");
             //vcprojgen.CreateTestSolution(@"C:\temp\FooBar", "Foo");
             //vcprojgen.CreateTestProject(@"C:\temp\FooBarFoo.sln", "myproj", VSGen.TestProjectType.Acceptance);
            
