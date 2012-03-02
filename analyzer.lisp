@@ -85,7 +85,8 @@
          (let ((keys (loop for key being the hash-keys of postvisit-hash
                            collect key)))
            (remove-if ;nb. "all" is a magic target we can safely discard
-             (lambda (file) (or (eq (cadr (assoc file alist)) nil) (eq file '|all|)))
+             (lambda (file) (or (eq (cadr (assoc file alist)) nil)
+                                (string= (symbol-name file) "all")))
              (sort keys #'< :key (lambda (file) (gethash file postvisit-hash)))))))
     (explore head)
   (cons (cycles-present-p) (list (build-order postvisit))))))
@@ -104,4 +105,4 @@
       (format t "    Optimal build order is ~a ~&"
               (if (car dft-result)
                 "nonexistent"
-                (cdr dft-result))))))
+                (cadr dft-result))))))
