@@ -60,21 +60,20 @@ namespace ProjectGenerator
                 file.WriteLine("Fourth line");
             }  
         }
-        public void appendline(string absfilepath, string line)
+        public void appendline(string absfilepath, string line, System.IO.StreamWriter file)
         {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@absfilepath, true))
-            {
-                file.WriteLine(line);
-            }    
+            if(file!=null)
+                file.WriteLine(line);  
         }
-        public void createfile(string absfilepath)
+        public System.IO.StreamWriter createfile(string absfilepath)
         {
             if (!System.IO.File.Exists(absfilepath))
             {
                 // Create a file to write to.
                 System.IO.StreamWriter sw = System.IO.File.CreateText(absfilepath);
-   
+                return sw;
             }
+            return null;
         }
     }
 
