@@ -24,19 +24,25 @@ namespace ProjectGenerator
 {
     public class BuildElement
     {
-        private string name;       //the unqualified name of the file with extension (ie main.cpp)
-        private string extension; // the extension of the file  //is the file generated or static
-        private string buildinstruction; //the literal instruction associated with building the file.
-        private List<string> prebuildinstructions; //the literal prebuild instructions associated with building the file.
-        private List<string> prelinkinstructions; //the literal prelink instructions associated with building the file.
-        private List<string> postbuildinstructions; //the literal postbuild instructions associated with building the file.
-        private List<BuildElement> dependencies;
+        public string name;       //the unqualified name of the file with extension (ie main.cpp)
+        public string extension; // the extension of the file  //is the file generated or static
+        public string buildinstruction; //the literal instruction associated with building the file.
+        public List<string> prebuildinstructions; //the literal prebuild instructions associated with building the file.
+        public List<string> prelinkinstructions; //the literal prelink instructions associated with building the file.
+        public List<string> postbuildinstructions; //the literal postbuild instructions associated with building the file.
+        //not sure if the below vars will stay
+        public List<string> dependencies;
+        public List<string> targets;
+        public List<string> instructions;
 
         public BuildElement(string vname, string vext, string vinstr)
         {
             this.name = vname;
             this.extension = vext;
             this.buildinstruction = vinstr;
+            this.dependencies = new List<string>();
+            this.targets = new List<string>();
+            this.instructions = new List<string>();
         }
         public override bool Equals(System.Object obj)
         {

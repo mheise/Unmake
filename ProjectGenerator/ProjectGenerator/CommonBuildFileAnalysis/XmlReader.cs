@@ -126,8 +126,9 @@ namespace ProjectGenerator
                                     buildgraph.AddNode(source);
                                 if (!buildgraph.Contains(target))
                                     buildgraph.AddNode(target);
+
                                 buildgraph.AddDirectedEdge((GraphNode<string>)buildgraph.GetNode(source), (GraphNode<string>)buildgraph.GetNode(target), 1);
-                                //buildgraph.AddDirectedEdge(new GraphNode<string>(source), new GraphNode<string>(target), 1);
+                                buildelements[source].dependencies.Add(target);
                                 target = "";
                                 dep = false;
                             }
