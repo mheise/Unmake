@@ -63,17 +63,23 @@
                    (explore u)))
                (cadr (assoc node alist)))
          (setf (gethash node postvisit) (incf tick))
-         nil))
-    (explore head))
-  (cons cyclicp postvisit))) ;TODO update cyclicp, actually order from postvisit
+         nil)
+       (build-order (postvisit-hash)
+         (let ((keys (loop for key being the hash-keys of postvisit-hash
+                           collect key)))
+           (sort keys #'< :key (lambda (file) (gethash file postvisit-hash))))))  
+    (explore head)
+  (cons cyclicp (list (build-order postvisit)))))) ;TODO update cyclicp
 
 (defun analyze (cbf-file)
   "Analyze and report on the properties of a Common Build Format file"
   (if (eq cbf-file nil) (setf cbf-file "cbf.xml"))
-
-  (format t "Report for the build system described in ~a: ~&" cbf-file)
-  (format t "    Number of rules: ~d ~&" (count-rules (to-sexpr cbf-file)))
-  (format t "    Build graph ~a cyclic ~&"
-          (if (car (depth-first-traverse (to-alist (to-sexpr cbf-file))))
-            "is"
-            "is not")))
+  (let ((cbf-sexpr (to-sexpr cbf-file)))
+    (format t "Report for the build system described in ~a: ~&" cbf-file)
+    (format t "    Number of rules: ~d ~&" (count-rules cbf-sexpr))
+    (let ((dft-result (depth-first-traverse (to-alist cbf-sexpr))))
+      (format t "    Build graph ~a cyclic ~&"
+              (if (car dft-result)
+                "is"
+                "is not"))
+      (format t "    Optimal build order is ~a" (cdr dft-result)))))
