@@ -33,16 +33,21 @@ $tpp->set(indent => 4, output_encoding => 'UTF-8');
 my $xml = $tpp->write($cbf->tree);
 print $xml;
 
-my @ordered_deps = sort {$cbf->deps->{$b} <=> $cbf->deps->{$a}} keys
-                                                                %{$cbf->deps};
+my @ordered_deps = sort {$cbf->deps->{$b} <=> $cbf->deps->{$a}}
+                        keys %{$cbf->deps};
+
+#output the graphviz image
+open my $imgfh, '>', $cbf->image;
+print $imgfh $cbf->graph->as_png;
+
+=begin
 make_template(  depth => $cbf->depth,
                 achilles => $ordered_deps[0] // undef,
                 broken => (defined $ordered_deps[0] ? undef : "make couldn't read makefile sensibly"),
                 bad => ($cbf->deps->{$ordered_deps[0]} > 2 ? 'chokepoints exist' : 0),
                 image => $cbf->image,
 );
-open my $imgfh, '>', $cbf->image;
-print $imgfh $cbf->graph->as_png;
+=cut
 
 # End of procedural section, beginning of helper functions
 sub make_template {
