@@ -53,10 +53,11 @@
         (postvisit (make-hash-table))
         (tick 0))
     (labels
-      ((cycles-present ()
+      ((cycles-present-p ()
+         "Check whether our graph contains any cycles"
          (let ((cyclicp nil)
                (files (mapcar #'car alist)))
-               (mapc (lambda (file)
+               (mapc (lambda (file) ;for each file, check if its deps have a back edge
                  (mapc (lambda (dep)
                          (if (and (< (gethash dep  previsit) ;back edge
                                      (gethash file previsit))
@@ -67,6 +68,8 @@
                files)
          cyclicp))
        (explore (node)
+         "The explore algorithm for topo-sorting and cycle detection.
+                cf. DPV's 'Algorithms' p. 95 for reference."
          (setf (gethash node visited) t)
          (setf (gethash node previsit) (incf tick))
          (mapc (lambda (u)
@@ -77,18 +80,23 @@
          (setf (gethash node postvisit) (incf tick))
          nil)
        (build-order (postvisit-hash)
+         "Generate an optimal build order via the postorder from our depth-first
+                    traversal, and filter out files that don't need to be built."
          (let ((keys (loop for key being the hash-keys of postvisit-hash
                            collect key)))
-           (sort keys #'< :key (lambda (file) (gethash file postvisit-hash))))))  
+           (remove-if ;nb. "all" is a magic target we can safely discard
+             (lambda (file) (or (eq (cadr (assoc file alist)) nil)
+                                (string= (symbol-name file) "all")))
+             (sort keys #'< :key (lambda (file) (gethash file postvisit-hash)))))))
     (explore head)
-  (cons (cycles-present) (list (build-order postvisit)))))) ;TODO update cyclicp
+  (cons (cycles-present-p) (list (build-order postvisit))))))
 
 (defun analyze (cbf-file)
   "Analyze and report on the properties of a Common Build Format file"
   (if (eq cbf-file nil) (setf cbf-file "cbf.xml"))
   (let ((cbf-sexpr (to-sexpr cbf-file)))
     (format t "Report for the build system described in ~a: ~&" cbf-file)
-    (format t "    Number of rules: ~d ~&" (count-rules cbf-sexpr))
+    (format t "    Number of files: ~d ~&" (count-rules cbf-sexpr))
     (let ((dft-result (depth-first-traverse (to-alist cbf-sexpr))))
       (format t "    Build graph is ~a ~&"
               (if (car dft-result)
@@ -97,4 +105,4 @@
       (format t "    Optimal build order is ~a ~&"
               (if (car dft-result)
                 "nonexistent"
-                (cdr dft-result))))))
+                (cadr dft-result))))))

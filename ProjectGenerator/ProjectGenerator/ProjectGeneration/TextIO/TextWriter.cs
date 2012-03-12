@@ -23,7 +23,7 @@ using System.Text;
 
 namespace ProjectGenerator
 {
-    class WriteTextFile
+    class TextWriter
     {
         static void writetest()
         {
@@ -60,5 +60,21 @@ namespace ProjectGenerator
                 file.WriteLine("Fourth line");
             }  
         }
+        public void appendline(string absfilepath, string line, System.IO.StreamWriter file)
+        {
+            if(file!=null)
+                file.WriteLine(line);  
+        }
+        public System.IO.StreamWriter createfile(string absfilepath)
+        {
+            if (!System.IO.File.Exists(absfilepath))
+            {
+                // Create a file to write to.
+                System.IO.StreamWriter sw = System.IO.File.CreateText(absfilepath);
+                return sw;
+            }
+            return null;
+        }
     }
+
 }

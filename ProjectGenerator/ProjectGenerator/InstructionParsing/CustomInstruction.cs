@@ -22,7 +22,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 
-namespace MakefileParser
+namespace ProjectGenerator
 {
     //Custom instructions that may be found in the makefile. A CustomComponent may have one or more of these instructions with its associated targets.
     public class CustomInstruction
