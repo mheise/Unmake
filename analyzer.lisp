@@ -17,13 +17,9 @@
   a much more useful format, such that we can build a reasonable alist or hash
   for the whole shebang."
   (labels
-    ((rule-name (rule)
-       (intern (car (cdaadr rule))))
-     (dep-name (dep)
-       (intern (caddr dep)))
-     (rule-deps (rule)
-       (mapcar #'dep-name (cddr rule))))
-
+    ((rule-name (rule) (intern (car (cdaadr rule))))
+     (dep-name  (dep)  (intern (caddr dep)))
+     (rule-deps (rule) (mapcar #'dep-name (cddr rule))))
     (cons (rule-name rule) (list (rule-deps rule)))))
 
 (defun to-alist (cbf-sexpr)
