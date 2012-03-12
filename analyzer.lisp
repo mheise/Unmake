@@ -18,7 +18,7 @@
   for the whole shebang."
   (labels
     ((rule-name (rule) (intern (car (cdaadr rule))))
-     (dep-name  (dep)  (intern (caddr dep)))
+     (dep-name  (dep)  (intern (third dep)))
      (rule-deps (rule) (mapcar #'dep-name (cddr rule))))
     (cons (rule-name rule) (list (rule-deps rule)))))
 
@@ -95,10 +95,10 @@
     (format t "    Number of files: ~d ~&" (count-rules cbf-sexpr))
     (let ((dft-result (depth-first-traverse (to-alist cbf-sexpr))))
       (format t "    Build graph is ~a ~&"
-              (if (car dft-result)
+              (if (first dft-result)
                 "cyclic :("
                 "acyclic :)"))
       (format t "    Optimal build order is ~a ~&"
-              (if (car dft-result)
+              (if (first dft-result)
                 "nonexistent"
-                (cadr dft-result))))))
+                (second dft-result))))))
