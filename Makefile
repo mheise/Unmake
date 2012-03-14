@@ -1,15 +1,18 @@
-all: parse_and_analyze analyze
+all: parse analyze
 
-analyze: analyzer.lisp wrap-analyzer.lisp
-	sbcl --load wrap-analyzer.lisp
+parse: parser/parser.pl
+	cp parser/parser.pl ./parse
 
-local-install: parse_and_analyze analyze CommonBuildFormat.pm
-	cp parse_and_analyze ~/bin/
-	cp analyze ~/bin/
-	cp CommonBuildFormat.pm /usr/local/lib/site_perl/
+analyze: analyzer/analyzer.lisp analyzer/wrap-analyzer.lisp
+	sbcl --load analyzer/wrap-analyzer.lisp
+
+local-install: parse analyze parser/CommonBuildFormat.pm
+	cp parse ~/bin/parse_build_system
+	cp analyze ~/bin/analyze_build_system
+	cp parser/CommonBuildFormat.pm /usr/local/lib/site_perl/
 
 clean:
-	rm build.html build.png analyze
+	rm build.html build.png analyze parse
 
 test:
 	perl t/*.t

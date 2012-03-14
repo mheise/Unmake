@@ -1,4 +1,4 @@
-(load "analyzer.lisp")
+(load "analyzer/analyzer.lisp")
 (in-package :unmake)
 
 (defun analyze-wrapper ()
