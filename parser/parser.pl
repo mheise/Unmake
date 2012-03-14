@@ -6,20 +6,17 @@ use 5.010;
 use HTML::Template;                     # kind of dirty :(
 use CommonBuildFormat;
 
-# NAME:         parse_and_analyze
 # AUTHORS:      Mike Heise
 # SYNOPSIS:     Driver for parsing and analysis of makefile
-# MODULE:       Parser, analyzer
-# MODULE DATA:  None
-# Notes:        See below
-
 # driver program for parsing and analysis. originally only the parsing was done
 # in Perl and the analysis was all done in Lisp, with the Common Build Format
 # file as an intermediary, but the libraries for dealing with XML in Lisp were
 # difficult to get to install on the system this was built on, so the analysis
-# was brought back to Perl in the interest of getting a working product. In a
-# future release, this will be fixed, as Perl is nice but Lisp really shines for
-# graph inspection and manipulation.
+# was brought back to Perl in the interest of getting a working product. 
+# This is in the process of being rectified, and real analysis is now being done
+# in analyzer/analyzer.lisp, but the generation of the graphviz visualization is
+# still here, as well as the (currently disabled) html template stuff.  The end
+# goal is that eventually this parser will do nothing but generate the CBF file.
 
 # parse. i love leveraging existing libraries!
 my $db_listing = `make --print-data-base -pqRrs -f Makefile`;
@@ -37,6 +34,7 @@ my @ordered_deps = sort {$cbf->deps->{$b} <=> $cbf->deps->{$a}}
                         keys %{$cbf->deps};
 
 #output the graphviz image
+print STDERR "Saving build system graph image as @{[$cbf->image]} ...\n";
 open my $imgfh, '>', $cbf->image;
 print $imgfh $cbf->graph->as_png;
 
