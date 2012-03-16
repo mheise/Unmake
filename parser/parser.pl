@@ -18,8 +18,13 @@ use CommonBuildFormat;
 # still here, as well as the (currently disabled) html template stuff.  The end
 # goal is that eventually this parser will do nothing but generate the CBF file.
 
+# options
+die "USAGE: $0 [makefile]\n"
+    if $#ARGV > 0;
+my $target = $ARGV[0] // 'Makefile';
+
 # parse. i love leveraging existing libraries!
-my $db_listing = `make --print-data-base -pqRrs -f Makefile`;
+my $db_listing = `make --print-data-base -pqRrs -f $target`;
 my $ast = Makefile::Parser::GmakeDB->parse(\$db_listing);
 
 # walk our AST an analyze it
