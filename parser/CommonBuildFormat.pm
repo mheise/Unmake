@@ -4,12 +4,8 @@ use XML::TreePP;
 use GraphViz;                           # dirty! DIRTY!
 use Moose; # turns on strict and warnings, too! :)
 
-# NAME:         CommonBuildFormat.pm
 # AUTHORS:      Mike Heise
 # SYNOPSIS:     Class encapsulating the common build format
-# MODULE:       Parser
-# MODULE DATA:  None
-# Notes:        See below
 
 # nb. that this module still somewhat suffers from unwarranted familiarity of
 # subcomponents - eg. for the 2.0 release, the GraphViz code will be refactored
@@ -21,12 +17,9 @@ use Moose; # turns on strict and warnings, too! :)
 # true instance vars
 has 'ast' => (is => 'rw', isa => 'Makefile::AST', required => 1);
 has 'tree' => (is => 'rw', isa => 'HashRef', default => sub { {buildsystem => {}} });
-has 'graph' => (is => 'ro', isa => 'GraphViz');
 has 'image' => (is => 'ro', isa => 'Str', default => 'build.png');
-has 'depth' => (is => 'rw', isa => 'Int', default => 0);
 
 # housekeeping vars, will eventually be refactored out
-has 'deps' => (is => 'ro', isa => 'HashRef', default => sub { {} });
 has 'edges' => (is => 'ro', isa => 'HashRef', default => sub { {} });
 
 sub BUILD {
@@ -35,7 +28,7 @@ sub BUILD {
     # root of the build tree we care about, and also nb. the hack here to put
     # everything inside a <build> element
     my $self = shift;
-    $self->depth(_traverse($self, $self->ast, $self->tree->{buildsystem}, 'all', 0));
+    _traverse($self, $self->ast, $self->tree->{buildsystem}, 'all');
 }
 
 sub _traverse {
@@ -46,32 +39,24 @@ sub _traverse {
     # the tree this builds in order to eventually feed to XML::TreePP is
     # demonstrated in auxiliary/xml_gen.pl for reference, although the basic
     # nested hash is pretty simple
-    my ($self, $ast, $tree, $nodename, $depth) = @_;
+    my ($self, $ast, $tree, $nodename) = @_;
     my ($node) = grep {$_->target eq $nodename} @{$ast->explicit_rules};
-    my $greatest = $depth;
     $tree->{file} = [] unless exists $tree->{file};
 
     if (defined $node) {
         my $parent = $node->target;
-        $self->graph->add_node($parent);
         push @{$tree->{file}}, {"-name" => $parent, dep => []};
         #consider keeping track of this ref instead of grepping for it later
         for my $child (@{$node->{normal_prereqs}}, @{$node->{ordered_prereqs}}) {
             if (! $self->edges->{$parent}{$child}) {
                 $self->edges->{$parent}{$child} = 1;
-                $self->graph->add_edge($parent, $child);
                 my $elem = (grep {$_->{"-name"} eq $parent}
                     @{$tree->{file}})[0];
                 push @{$elem->{dep}}, $child;
-                my $cur = _traverse($self, $ast, $tree, $child, $depth + 1);
-                $greatest = ($cur > $greatest ? $cur : $greatest);
+                my $cur = _traverse($self, $ast, $tree, $child);
             }
-            $self->deps->{$child} = (defined $self->deps->{$child} ?
-                $self->deps->{$child}+1 : 1);
         }
     }
-
-    return ($depth > $greatest ? $depth : $greatest);
 }
 
 1; # ending with true value -> successful 'use' statement
