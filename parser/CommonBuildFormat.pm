@@ -1,23 +1,18 @@
 package CommonBuildFormat;
-use Makefile::Parser::GmakeDB;
 use XML::TreePP;
-use GraphViz;                           # dirty! DIRTY!
 use Moose; # turns on strict and warnings, too! :)
 
-# AUTHORS:      Mike Heise
-# SYNOPSIS:     Class encapsulating the common build format
+# AUTHORS:  Mike Heise
+# SYNOPSIS: Class encapsulating the common build format
 
 # nb. that this module still somewhat suffers from unwarranted familiarity of
-# subcomponents - eg. for the 2.0 release, the GraphViz code will be refactored
-# out of the the helper to the constructor to its own separate home, and the XML
-# tree code will be brought in from outside (since internally we're working with
+# subcomponents - eg. internally we're working with
 # a nested hash structure that only makes sense in the context of being fed to
-# XML::TreePP)
+# XML::TreePP
 
 # true instance vars
 has 'ast' => (is => 'rw', isa => 'Makefile::AST', required => 1);
 has 'tree' => (is => 'rw', isa => 'HashRef', default => sub { {buildsystem => {}} });
-has 'image' => (is => 'ro', isa => 'Str', default => 'build.png');
 
 # housekeeping vars, will eventually be refactored out
 has 'edges' => (is => 'ro', isa => 'HashRef', default => sub { {} });
