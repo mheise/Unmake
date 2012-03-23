@@ -21,8 +21,11 @@ die "USAGE: $0 [makefile]\n"
     if $#ARGV > 0;
 my $target = $ARGV[0] // 'Makefile';
 
+# de-sugar
+`makesimple -f $target > $target.mks`;
+
 # parse. i love leveraging existing libraries!
-my $db_listing = `make --print-data-base -pqRrs -f $target`;
+my $db_listing = `make --print-data-base -pqRrs -f $target.mks`;
 my $ast = Makefile::Parser::GmakeDB->parse(\$db_listing);
 
 # walk our AST an analyze it

@@ -35,12 +35,18 @@ sub _traverse {
     # demonstrated in auxiliary/xml_gen.pl for reference, although the basic
     # nested hash is pretty simple
     my ($self, $ast, $tree, $nodename) = @_;
+    # the grep here is kind of ugly and should perhaps be factored out
     my ($node) = grep {$_->target eq $nodename} @{$ast->explicit_rules};
     $tree->{file} = [] unless exists $tree->{file};
 
     if (defined $node) {
-        my $parent = $node->target;
-        push @{$tree->{file}}, {"-name" => $parent, dep => []};
+        my ($parent, $commands) = ($node->target, $node->commands);
+        push @{$tree->{file}}, {"-name" => $parent, dep => [],
+            command => (defined $commands
+                        ? [ map {$_->content =~ /(.*)\n$/; $1} @$commands]
+                        : []
+            )
+        };
         #consider keeping track of this ref instead of grepping for it later
         for my $child (@{$node->{normal_prereqs}}, @{$node->{ordered_prereqs}}) {
             if (! $self->edges->{$parent}{$child}) {
