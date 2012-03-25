@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <buildsystem>
-    <file name="all">
-        <dep>hello</dep>
+    <file name="all"><dep>hello</dep>
     </file>
     <file name="hello">
+        <command>g++ main.o factorial.o hello.o -o hello</command>
         <dep>main.o</dep>
         <dep>factorial.o</dep>
         <dep>hello.o</dep>
     </file>
     <file name="main.o">
+        <command>g++ -c main.cpp</command>
         <dep>main.cpp</dep>
     </file>
     <file name="factorial.o">
+        <command>g++ -c factorial.cpp</command>
         <dep>factorial.cpp</dep>
     </file>
     <file name="hello.o">
+        <command>g++ -c hello.cpp</command>
         <dep>hello.cpp</dep>
         <dep>stupid</dep>
     </file>
-    <file name="stupid">
-        <dep>hello.o</dep>
+    <file name="stupid"><dep>hello.o</dep>
     </file>
-    <file name="hello.o"></file>
+    <file name="hello.o"><command>g++ -c hello.cpp</command>
+    </file>
 </buildsystem>
