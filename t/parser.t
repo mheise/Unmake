@@ -6,23 +6,20 @@ my $mock_contents = do {local $/; <DATA>}; # see __END__ section
 my $ast = Makefile::Parser::GmakeDB->parse(\$mock_contents);
 
 # first check that our constructor returned an object of the right type
-my $cbf = CommonBuildFormat->new(ast => $ast, graph => GraphViz->new);
+my $cbf = CommonBuildFormat->new(ast => $ast);
 isa_ok($cbf, 'CommonBuildFormat');
 
 # now make sure our instance objects were constructed sensibly
 isa_ok($cbf->ast, 'Makefile::AST');
-isa_ok($cbf->graph, 'GraphViz');
 
 # now, test actual business logic to make sure our traversal is right. nb that
 # these values correspond the the mocked makefile output contained in output.txt
 # in this directory.
 
-like(ref $cbf->deps, qr/HASH/, "Internal dependency tracking correctly set up");
 like(ref $cbf->edges, qr/HASH/, "Internal edge tracking correctly set up");
 
 like(ref $cbf->tree, qr/HASH/, "Internal tree correctly set up");
-like($cbf->tree->{build}{rule}, qr/ARRAY/, "Internal tree sane");
-ok($cbf->depth == 3, "Depth calculated correctly");
+like($cbf->tree->{buildsystem}{file}, qr/ARRAY/, "Internal tree sane");
 
 done_testing();
 
