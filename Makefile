@@ -1,6 +1,8 @@
 all: parse analyze
 
-parse: parser/parser.pl
+parse: parser/parser.pl parser/CommonBuildFormat.pm
+	perl -c parser/CommonBuildFormat.pm
+	perl -c parser/parser.pl
 	cp parser/parser.pl ./parse
 
 analyze: analyzer/analyzer.lisp analyzer/wrap-analyzer.lisp
@@ -12,7 +14,7 @@ local-install: parse analyze parser/CommonBuildFormat.pm
 	cp parser/CommonBuildFormat.pm /usr/local/lib/site_perl/
 
 clean:
-	rm build.html build.png analyze parse
+	rm analyze parse
 
 test:
-	perl t/*.t
+	prove
