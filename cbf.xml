@@ -1,115 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <buildsystem>
     <file name="all">
-        <dep>tar</dep>
-        <dep>rmt</dep>
-        <dep>tar.info</dep>
+        <dep>parse</dep>
+        <dep>analyze</dep>
     </file>
-    <file name="tar">
-        <dep>tar.o</dep>
-        <dep>create.o</dep>
-        <dep>extract.o</dep>
-        <dep>buffer.o</dep>
-        <dep>getoldopt.o</dep>
-        <dep>update.o</dep>
-        <dep>gnu.o</dep>
-        <dep>mangle.o</dep>
-        <dep>version.o</dep>
-        <dep>list.o</dep>
-        <dep>names.o</dep>
-        <dep>diffarch.o</dep>
-        <dep>port.o</dep>
-        <dep>wildmat.o</dep>
-        <dep>getopt.o</dep>
-        <dep>getopt1.o</dep>
-        <dep>regex.o</dep>
-        <dep>getdate.o</dep>
-        <dep>rtapelib.o</dep>
+    <file name="parse">
+        <command>perl -c parser/CommonBuildFormat.pm</command>
+        <command>perl -c parser/parser.pl</command>
+        <command>cp parser/parser.pl ./parse</command>
+        <dep>parser/parser.pl</dep>
+        <dep>parser/CommonBuildFormat.pm</dep>
     </file>
-    <file name="tar.o">
-        <dep>regex.h</dep>
-        <dep>tar.c</dep>
-    </file>
-    <file name="regex.h"></file>
-    <file name="tar.c"></file>
-    <file name="create.o">
-        <dep>create.c</dep>
-    </file>
-    <file name="create.c"></file>
-    <file name="extract.o">
-        <dep>extract.c</dep>
-    </file>
-    <file name="extract.c"></file>
-    <file name="buffer.o">
-        <dep>regex.h</dep>
-        <dep>buffer.c</dep>
-    </file>
-    <file name="regex.h"></file>
-    <file name="buffer.c"></file>
-    <file name="getoldopt.o">
-        <dep>getoldopt.c</dep>
-    </file>
-    <file name="getoldopt.c"></file>
-    <file name="update.o">
-        <dep>update.c</dep>
-    </file>
-    <file name="update.c"></file>
-    <file name="gnu.o">
-        <dep>gnu.c</dep>
-    </file>
-    <file name="gnu.c"></file>
-    <file name="mangle.o">
-        <dep>mangle.c</dep>
-    </file>
-    <file name="mangle.c"></file>
-    <file name="version.o">
-        <dep>version.c</dep>
-    </file>
-    <file name="version.c"></file>
-    <file name="list.o">
-        <dep>list.c</dep>
-    </file>
-    <file name="list.c"></file>
-    <file name="names.o">
-        <dep>names.c</dep>
-    </file>
-    <file name="names.c"></file>
-    <file name="diffarch.o">
-        <dep>diffarch.c</dep>
-    </file>
-    <file name="diffarch.c"></file>
-    <file name="port.o">
-        <dep>port.c</dep>
-    </file>
-    <file name="port.c"></file>
-    <file name="wildmat.o">
-        <dep>wildmat.c</dep>
-    </file>
-    <file name="wildmat.c"></file>
-    <file name="getopt.o">
-        <dep>getopt.c</dep>
-    </file>
-    <file name="getopt.c"></file>
-    <file name="getopt1.o">
-        <dep>getopt1.c</dep>
-    </file>
-    <file name="getopt1.c"></file>
-    <file name="regex.o">
-        <dep>regex.h</dep>
-        <dep>regex.c</dep>
-    </file>
-    <file name="regex.h"></file>
-    <file name="regex.c"></file>
-    <file name="getdate.o">
-        <dep>getdate.c</dep>
-    </file>
-    <file name="rtapelib.o">
-        <dep>rtapelib.c</dep>
-    </file>
-    <file name="rmt">
-        <dep>rmt.c</dep>
-    </file>
-    <file name="tar.info">
-        <dep>tar.texinfo</dep>
+    <file name="analyze">
+        <command>sbcl --load analyzer/wrap-analyzer.lisp</command>
+        <dep>analyzer/analyzer.lisp</dep>
+        <dep>analyzer/wrap-analyzer.lisp</dep>
     </file>
 </buildsystem>
