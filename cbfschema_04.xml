@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://rcos.rpi.edu/">
+
+<xs:element name="buildsystem">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="file"/>
+		<xs:complexType>
+		    <xs:sequence>
+				<xs:element name="command" type="xs:string"/>
+				<xs:element name="dep" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>
