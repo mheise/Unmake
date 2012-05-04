@@ -1,16 +1,19 @@
+CC=g++
+CFLAGS=-Wall -Wextra -O2
+
 all: hello
 
 hello: main.o factorial.o hello.o
-	g++ main.o factorial.o hello.o -o hello
+	$(CC) $(CFLAGS) main.o factorial.o hello.o -o hello
 
 main.o: main.cpp
-	g++ -c main.cpp
+	$(CC) $(CFLAGS) -c main.cpp
 
 factorial.o: factorial.cpp
-	g++ -c factorial.cpp
+	$(CC) $(CFLAGS) -c factorial.cpp
 
 hello.o: hello.cpp
-	g++ -c hello.cpp
+	$(CC) $(CFLAGS) -c hello.cpp
 
 clean:
 	rm -rf *o hello
