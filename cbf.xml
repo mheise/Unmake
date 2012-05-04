@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <buildsystem>
     <file name="all">
+        <dep>unmake</dep>
+    </file>
+    <file name="unmake">
+        <command>perl -c unmake.pl</command>
+        <command>cp unmake.pl unmake</command>
+        <dep>unmake.pl</dep>
         <dep>parse</dep>
         <dep>analyze</dep>
     </file>
