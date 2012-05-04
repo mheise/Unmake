@@ -41,6 +41,14 @@
   (if (eq cbf-sexpr nil) 0
     (+ 1 (count-rules (cdr cbf-sexpr)))))
 
+(defun count-files (cbf-alist)
+  (let ((dedup-hash (make-hash-table)))
+    (mapc (lambda (rule)
+            (setf (gethash (car rule) dedup-hash) 1)
+            (mapc (lambda (file)
+                    (setf (gethash file dedup-hash) 1)) (cdr rule))) cbf-alist)
+    (hash-table-count dedup-hash)))
+
 (defun depth-first-traverse (alist)
   "Performs a DFT (more accurately an exploration) of the given alist, returning
   a cons of (cyclicp . build-order)
@@ -96,6 +104,7 @@
   (let ((cbf-sexpr (to-sexpr cbf-file)))
     (format t "Report for the build system described in ~a: ~&" cbf-file)
     (format t "    Number of rules: ~d ~&" (count-rules cbf-sexpr))
+    (format t "    Number of files: ~d ~&" (count-files (to-alist cbf-sexpr)))
     (let ((dft-result (depth-first-traverse (to-alist cbf-sexpr))))
       (format t "    Build graph is ~a ~&"
               (if (first dft-result)
