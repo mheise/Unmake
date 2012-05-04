@@ -86,6 +86,8 @@ namespace ProjectGenerator
             string source = "";
             string target = "";
             bool dep = false;
+            bool command = false;
+            BuildElement element = null;
             try
             {
                 while (reader.Read())
@@ -97,6 +99,7 @@ namespace ProjectGenerator
                             Console.Write("<" + reader.Name);
                             if (reader.Name == "file")
                             {
+                                element = new BuildElement();
                                 while (reader.MoveToNextAttribute())// Read the attributes.
                                 {
                                     if (reader.Name == "name")
@@ -104,8 +107,10 @@ namespace ProjectGenerator
                                         name = reader.Value;
                                         source = reader.Value;
                                         extension = System.IO.Path.GetExtension(reader.Value);
-                                       // buildgraph.AddNode(name);
-                                        buildelements.Add(name, new BuildElement(name, extension, instruction));
+                                        element.setName(name);
+                                        element.setExtension(extension);
+                                        buildelements.Add(name, element);
+                                        //buildgraph.AddNode(name);
                                     }
                                     Console.Write(" " + reader.Name + "='" + reader.Value + "'");
                                 }
@@ -114,6 +119,10 @@ namespace ProjectGenerator
                             {
                                 dep = true;
                             }
+                            if (reader.Name == "command")
+                            {
+                                command = true;
+                            }                         
     
                             
                             Console.WriteLine(">");
@@ -132,9 +141,18 @@ namespace ProjectGenerator
                                 target = "";
                                 dep = false;
                             }
+                            if (command)
+                            {
+                                buildelements[name].setBuildInstruction(reader.Value);
+                                command = false;
+                            }
                             Console.WriteLine(reader.Value);
                             break;
                         case XmlNodeType.EndElement: //Display the end of the element.
+                            if (reader.Name == "file")
+                            {
+                                element = null;
+                            }
                             Console.Write("</" + reader.Name);
                             Console.WriteLine(">");
                             break;

@@ -35,6 +35,14 @@ namespace ProjectGenerator
         public List<string> targets;
         public List<string> instructions;
 
+        public BuildElement()
+        {
+            this.extension = "";
+            this.buildinstruction = "";
+            this.dependencies = new List<string>();
+            this.targets = new List<string>();
+            this.instructions = new List<string>();
+        }
         public BuildElement(string vname, string vext, string vinstr)
         {
             this.name = vname;
@@ -44,6 +52,31 @@ namespace ProjectGenerator
             this.targets = new List<string>();
             this.instructions = new List<string>();
         }
+        public void setName(string name)
+        {
+            this.name = name;
+        }
+        public void setExtension(string extension)
+        {
+            this.extension = extension;
+        }
+        public void setBuildInstruction(string buildinstruction)
+        {
+            this.buildinstruction = buildinstruction;
+        }
+        public void addDependency(string dep)
+        {
+            dependencies.Add(dep);
+        }
+        public void addTarget(string target)
+        {
+            targets.Add(target);
+        }
+        public void addInstruction(string instr)
+        {
+            targets.Add(instr);
+        }
+        
         public override bool Equals(System.Object obj)
         {
             // If parameter is null return false.
