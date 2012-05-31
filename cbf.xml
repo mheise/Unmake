@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<buildsystem>
+<?xml version="1.0" encoding="utf-8"?>
+
+<buildsystem xmlns:xsi="http://rcos.rpi.edu">
     <file name="all">
         <dep>parse</dep>
         <dep>analyze</dep>

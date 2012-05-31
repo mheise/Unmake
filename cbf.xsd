@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://rcos.rpi.edu" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://rcos.rpi.edu" />
+  <xs:element name="buildsystem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="file">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="command" type="xs:string" />
+              <xs:element minOccurs="0" name="BAD" type="xs:string" />
+              <xs:element maxOccurs="unbounded" name="dep" type="xs:string" />
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute ref="xsi:noNamespaceSchemaLocation" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

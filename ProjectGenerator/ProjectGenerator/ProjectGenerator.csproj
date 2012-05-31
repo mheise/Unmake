@@ -53,6 +53,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CommonBuildFileAnalysis\BuildElement.cs" />
+    <Compile Include="CommonBuildFileAnalysis\XmlValidator.cs" />
     <Compile Include="InstructionParsing\CustomActionsBare.cs" />
     <Compile Include="InstructionParsing\InstructionParser.cs" />
     <Compile Include="CommonBuildFileAnalysis\Graph.cs" />

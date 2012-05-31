@@ -34,8 +34,10 @@ namespace ProjectGenerator
             //VSGen vcprojgen = new VSGen();
             //CmakeGen cgen = new CmakeGen();             
             XmlReader reader = XmlReader.Instance;
-            KeyValuePair<Graph<string>,Dictionary<string,BuildElement> > buildinfo = new KeyValuePair<Graph<string>,Dictionary<string,BuildElement> >();
-            buildinfo = reader.readbuildfile("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\ProjectGenerator\\Sample_Build_System_2\\cbf.xml");
+            XmlValidator validator = XmlValidator.Instance;
+            //KeyValuePair<Graph<string>,Dictionary<string,BuildElement> > buildinfo = new KeyValuePair<Graph<string>,Dictionary<string,BuildElement> >();
+            //buildinfo = reader.readbuildfile("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\ProjectGenerator\\Sample_Build_System_2\\cbf.xml");
+            bool valid = validator.validateXml("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\cbf.xml");
             //vcprojgen.CreateTestSolution(@"C:\temp\FooBar", "Foo");
             //vcprojgen.CreateTestProject("C:\temp\FooBarFoo.sln", "myproj", VSGen.TestProjectType.Acceptance);
             //cgen.CreateCmakeList("C:\\Users\\kotarf\\Documents\\Unmake\\Unmake\\ProjectGenerator\\Sample_Build_System_2\\", "clists.txt", buildinfo.Value, buildinfo.Key);
